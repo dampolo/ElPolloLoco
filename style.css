@@ -1,0 +1,158 @@
+/*
+  1. Use a more-intuitive box-sizing model.
+*/
+*, *::before, *::after {
+box-sizing: border-box;
+}
+/*
+2. Remove default margin
+*/
+
+* {
+margin: 0;
+}
+/*
+Typographic tweaks!
+3. Add accessible line-height
+4. Improve text rendering
+*/
+body {
+line-height: 1.5;
+font-family: "kablammo-variable", sans-serif;
+font-variation-settings: "MORF" 0;
+}
+/*
+5. Improve media defaults
+*/
+img, picture, video, canvas, svg {
+display: block;
+max-width: 100%;
+}
+/*
+6. Remove built-in form typography styles
+*/
+input, button, textarea, select {
+font: inherit;
+}
+/*
+7. Avoid text overflows
+*/
+p, h1, h2, h3, h4, h5, h6 {
+    overflow-wrap: break-word;
+    margin: 0;
+    padding: 0;
+}
+/*
+8. Create a root stacking context
+*/
+#root, #__next {
+isolation: isolate;
+}
+
+h1 {
+    margin-bottom: 2rem;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-image: url('./img/desert.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+canvas {
+    position: relative;
+    background-color: black;
+    display: block;
+    border-radius: 1rem;
+    -webkit-box-shadow: 0px 0px 10px 3px #EF9248; 
+    box-shadow: 0px 0px 10px 3px #EF9248;
+}
+button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    width: 2.5rem;
+    height: 2.5rem;
+    background-color: transparent;
+    border: 2px solid black;
+}
+
+.start {
+    width: 45rem;
+    height: 480px;
+    background: url('./img/9_intro_outro_screens/start/startscreen_1.png');
+    background-repeat: no-repeat;
+    background-size: 720px 480px;
+    border-radius: 1rem;
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.game-over {
+    width: 45rem;
+    height: 480px;
+    background: url('./img/9_intro_outro_screens/start/startscreen_1.png');
+    background-repeat: no-repeat;
+    background-size: 720px 480px;
+    border-radius: 1rem;
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.play-game {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.buttons-top {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    display: flex;
+    align-self: flex-end;
+    margin: 1rem;
+    gap: 1.25rem;
+    z-index: 1;
+}
+
+.buttons-down {
+    position: absolute;
+    bottom: 5px;
+    left: 5px;
+    display: flex;
+    margin: 1rem;
+    gap: 1.25rem;
+    z-index: 1;
+    min-width: 680px;
+}
+
+.up {
+    margin-left: auto;
+}
+.buttons-down img {
+    width: 30px;
+    height: 30px;
+}
+
+@media only screen and (max-width: 720px){
+    canvas {
+        width: 100%;
+    }
+}
+
+@media only screen and (max-height: 480px) {
+    canvas {
+        height: 100vh;
+    }
+}

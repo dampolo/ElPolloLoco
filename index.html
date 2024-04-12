@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" translate="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El Pollo Loco</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://use.typekit.net/iwb4juf.css">
+    
+    <link rel="shortcut icon" href="./img/2_character_pepe/1_idle/idle/I-1.png" type="image/x-icon">
+</head>
+<body>
+    <h1>El Pollo Loco</h1>
+    
+    <div class="start">
+        
+    </div>
+    
+    <div class="play-game">
+        <div class="buttons-top">
+            <button>
+                <img src="./img/10_icons/volume-off.svg" alt="" srcset="">
+            </button>
+    
+            <button>
+                <img src="./img/10_icons/volume.svg" alt="" srcset="">
+            </button>
+        </div>
+    
+        <div class="buttons-down">
+            <button class="left">
+                <img src="./img/10_icons/left.svg" alt="" srcset="">
+            </button>
+            <button class="right">
+                <img src="./img/10_icons/right.svg" alt="" srcset="">
+            </button>
+            <button class="up">
+                <img src="./img/10_icons/up.svg" alt="" srcset="">
+            </button>
+            <button class="bottle">
+                <img src="./img/6_salsa_bottle/salsa_bottle.png" alt="" srcset="">
+            </button>
+        </div>
+
+        <canvas id="canvas" width="720" height="480"></canvas>
+    </div>
+
+    <script src="./models/drawable-object.class.js"></script>
+    <script src="./models/movable-object.class.js"></script>
+    <script src="./models/character.class.js"></script>
+    <script src="./models/chicken.class.js"></script>
+    <script src="./models/chicken-baby.class.js"></script>
+
+    
+    <script src="./models/cloud.class.js"></script>
+    <script src="./models/character-bar.class.js"></script>
+    <script src="./models/coin-bar.class.js"></script>
+    <script src="./models/bottle-bar.class.js"></script>
+    <script src="./models/boss-bar.class.js"></script>
+    <script src="./models/coins.class.js"></script>
+    <script src="./models/bottle-bottom.class.js"></script>
+    
+    
+    <script src="./models/world.class.js"></script>
+    <script src="./models/keyboards.class.js"></script>
+    <script src="./models/background.class.js"></script>
+    <script src="./models/level.class.js"></script>
+    <script src="./models/endboss.class.js"></script>
+    <script src="./models/throwable-object.class.js"></script>
+    <script src="./levels/level1.js"></script>
+    <script src="./js/game.js"></script>
+
+    <script>
+    document.addEventListener("DOMContentLoaded", (event) => {
+        init()
+      });
+      </script>
+</body>
+</html>
+
+<!-- Pytania:
+    1.    bottle-bottom.class.js
+    this.IMAGES_BOTTLE[displayBottle()]
+
+    2. Mozna extends zrobic z 2 class. > nie ma
+
+
+    3. Nie potrzebujesz w super() parametra z aktualnej 
+    class bo on juz jest w tej class,
+    W super() potrzebujesz parameter z class parent
+ 
+
+    Constructor:
+    Funkcje mozna tez dac do constructora ale wtedy nie 
+    mozna z niej korzystac innej class.
+ 
+    Kiedy uzywa sie static?
+-->
