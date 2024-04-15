@@ -85,7 +85,7 @@ class Character extends MovableObject {
         this.loadImages(this.IMAGES_LONG_IDLE);
 
         this.animate();
-        this.x = 50;
+        this.x = -50;
         this.y = 180;
         this.speed = 10
         this.height= 250;
@@ -127,16 +127,19 @@ class Character extends MovableObject {
                 this.resetAnimation();
             }
 
-            if (this.x > 180) {
-            this.world.camera_x = -this.x + 180;
-            } else if (this.x < 50){
-            this.world.camera_x = -this.x + 50;
-            }
+            this.world.camera_x = -this.x + 85;
 
 
-            if (this.x >= 3360) {
-                this.world.camera_x = -this.x + 180;
-            }
+            // if (this.x > 180) {
+            // this.world.camera_x = -this.x + 180;
+            // } else if (this.x < 50){
+            // this.world.camera_x = -this.x + 50;
+            // }
+
+
+            // if (this.x >= 3360) {
+            //     this.world.camera_x = -this.x + 180;
+            // }
 
 
         }, 1000 / 60);

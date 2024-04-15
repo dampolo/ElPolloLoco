@@ -105,19 +105,21 @@ class World {
 
     this.throwableObjects.forEach((bottle) => {
       this.level.enemies.forEach((enemy) => {
-        if (enemy.isColliding(bottle)) {
-          //tu usuwam trafione kury
-          this.level.enemies = this.level.enemies.filter((el) => {
-            if (el === enemy) {
-              return false; //tu usuwa
-            } else {
-              return true;
-            }
-          });
+        if (enemy !== this.boss) {
+          if (enemy.isColliding(bottle)) {
+            // tu usuwam trafione kury
+            this.level.enemies = this.level.enemies.filter((el) => {
+              if (el === enemy) {
+                return false; //tu usuwa
+              } else {
+                return true;
+              }
+            });
+          }
 
           bottle.hit();
 
-          //Wypierdala flaszki z planszy po rzuceniu na bossa.
+          // Wypierdala flaszki z planszy po rzuceniu na kury.
           setTimeout(() => {
             this.throwableObjects = this.throwableObjects.filter((el) => {
               if (el === bottle) {
@@ -216,8 +218,11 @@ class World {
 
   endBossAction() {
     const endPositionFromStart = 3300;
-    if(this.character.x >= endPositionFromStart) {
-        this.boss.isAttacking = true
+    // const endPositionFromStart = -50;
+
+    if (this.character.x >= endPositionFromStart) {
+      console.log(endPositionFromStart);
+      this.boss.isWalking = true;
     }
   }
 
