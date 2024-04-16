@@ -92,7 +92,7 @@ class Character extends MovableObject {
         this.width= 100;
         this.applyGravity();
         this.counterCoint = 0;
-        this.counterBottle = 0;
+        this.counterBottle = 5;
         this.maxCounterBottle = 5;
         this.energy = 100; 
       }
@@ -172,7 +172,7 @@ class Character extends MovableObject {
 
         setInterval(() => {
             if(this.isDead()) {
-                console.log(this.currentImage);
+                // console.log(this.currentImage);
                 this.playAnimation(this.IMAGES_DEAD, false);
 
                 setTimeout(() => {

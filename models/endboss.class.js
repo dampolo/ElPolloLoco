@@ -49,8 +49,8 @@ class Endboss extends MovableObject {
     this.loadImages(this.IMAGES_WALKING);
     this.loadImages(this.IMAGES_ATTACK);
     this.y = 140;
-    this.x = 3690;
-    // this.x = 300;
+    // this.x = 3690;
+    this.x = 300;
 
     this.height = 300;
     this.width = 300;
@@ -62,58 +62,79 @@ class Endboss extends MovableObject {
     this.animate();
   }
 
+  animate() {
+    this.isStayingBoss();
+  }
+
   isStayingBoss() {
     // bez this.stayingInterval niedziala poprawnie
     this.stayingInterval = setInterval(() => {
-      this.playAnimation(this.IMAGES_STAYING);
-      // console.log("stay");
+      if(!this.isHurt()) {
+        this.playAnimation(this.IMAGES_STAYING);
+        console.log("stay");
+      } else {
+        this.playAnimation(this.IMAGES_HURT);
+        console.log("hurt");
+      }
     }, 250);
+
+    setTimeout(() => {
+      this.walkingBossWalk()
+    }, 10000)
   }
 
   isHurtBoss() {
     this.hurtInterval = setInterval(() => {
-      if (this.isHurt()) {
-        this.playAnimation(this.IMAGES_HURT);
-        // console.log("hurt");
-      }
-    }, 500);
+      this.playAnimation(this.IMAGES_HURT);
+      console.log("hurt");
+    }, 250);
+  }
+
+  isWalkingBoss() {
+    this.walkInterval = setInterval(() => {
+      this.playAnimation(this.IMAGES_WALKING);
+      console.log("walk");
+    }, 250);
   }
 
   // ale to zakrecone
-  stopStayingBoss() {
+  stopStayingInterval() {
     clearInterval(this.stayingInterval);
+  }
+
+  stopHurtingInterval() {
     clearInterval(this.hurtInterval);
+  }
+  stopWalkingInterval() {
+    console.log('stopWalkingInterval');
+    clearInterval(this.walkInterval);
   }
 
   endbossSlower() {
     this.speed = 0;
+    this.x = this.x + 20
     setTimeout(() => {
       this.speed = 5;
     }, 2000);
   }
 
-  animate() {
-
-	this.isStayingBoss();
-	
+  walkingBossWalk() {
     setInterval(() => {
-      if (this.isWalking) {
-        setTimeout(() => {
-          this.stopStayingBoss();
-          this.playAnimation(this.IMAGES_WALKING);
-          this.moveLeft();
-          // console.log("walk");
-          if (this.isHurt()) {
-            this.playAnimation(this.IMAGES_HURT);
-            this.endbossSlower();
-            // console.log("hurt");
-          } else if (this.isDead()) {
-            this.playAnimation(this.IMAGES_DEAD);
-          }
-        }, 5000);
+      this.stopStayingInterval();
+      this.playAnimation(this.IMAGES_WALKING);
+      this.moveLeft();
+      console.log("walkAnimate");
+      if(this.isHurt()) {
+        this.WalkingBossHurt()
+      } else if (this.isDead()) {
+        this.playAnimation(this.IMAGES_DEAD)
       }
-    }, 250);
-
-    //Tutaj jestem
+    }, 250)
   }
+
+  WalkingBossHurt() {
+    this.endbossSlower()
+    this.playAnimation(this.IMAGES_HURT)
+
+  }  
 }
