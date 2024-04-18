@@ -105,6 +105,7 @@ class Endboss extends MovableObject {
     setInterval(() => {
       this.stopStayingInterval();
       this.playAnimation(this.IMAGES_WALKING);
+      this.y = this.y;
       this.moveLeft();
       if(this.isHurt()) {
         this.WalkingBossHurt()
@@ -112,7 +113,6 @@ class Endboss extends MovableObject {
         this.playAnimation(this.IMAGES_DEAD)
       } else if (this.isAttacking) {
         this.playAnimation(this.IMAGES_ATTACK)
-        this.y = this.y - 2
       } 
     }, 250)
   }

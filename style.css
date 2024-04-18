@@ -83,6 +83,7 @@ button {
     height: 2.5rem;
     background-color: transparent;
     border: 2px solid black;
+    cursor: pointer;
 }
 
 .start {
@@ -92,21 +93,25 @@ button {
     background-repeat: no-repeat;
     background-size: 720px 480px;
     border-radius: 1rem;
-    display: none;
-    flex-direction: column;
-    justify-content: space-between;
+    position: absolute;
+    z-index: 3;
+    display: flex;
 }
 
 .game-over {
     width: 45rem;
     height: 480px;
-    background: url('./img/9_intro_outro_screens/start/startscreen_1.png');
+    background: url('./img/9_intro_outro_screens/game_over/game over.png');
     background-repeat: no-repeat;
     background-size: 720px 480px;
     border-radius: 1rem;
+    position: absolute;
     display: none;
-    flex-direction: column;
-    justify-content: space-between;
+    z-index: 5;
+}
+
+.d-none {
+    display: none;
 }
 
 .play-game {
@@ -124,7 +129,7 @@ button {
     align-self: flex-end;
     margin: 1rem;
     gap: 1.25rem;
-    z-index: 1;
+    z-index: 5;
 }
 
 .buttons-down {
@@ -151,6 +156,7 @@ button {
     justify-content: space-between;
     gap: 1rem;
 }
+
 
 @media only screen and (max-width: 720px){
     canvas {

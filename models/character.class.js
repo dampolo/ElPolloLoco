@@ -94,7 +94,7 @@ class Character extends MovableObject {
         this.counterCoint = 0;
         this.counterBottle = 0;
         this.maxCounterBottle = 5;
-        this.energy = 100; 
+        this.energy = 1000; 
       }
 
 
@@ -115,6 +115,7 @@ class Character extends MovableObject {
 
             if(this.world.keyboard.LEFT && this.x > -1500) {
                 this.moveLeft();
+
                 this.otherDirection = true;
                 // this.walkingSound.play();
             }

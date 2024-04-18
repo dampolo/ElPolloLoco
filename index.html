@@ -12,12 +12,25 @@
 <body>
     <h1>El Pollo Loco</h1>
     
-    <div class="start">
-        
-    </div>
+    
     
     <div class="play-game">
+        
+        <div class="start">
+
+        </div>
+
+        <div class="game-over">
+
+        </div>
+
         <div class="buttons-top">
+            <button class="start-button">
+                <img src="./img/10_icons/start.svg" alt="" srcset="">
+            </button>
+            <button class="reset-button">
+                <img src="./img/10_icons/reset.svg" alt="" srcset="">
+            </button>
             <button>
                 <img src="./img/10_icons/volume-off.svg" alt="" srcset="">
             </button>
@@ -47,7 +60,9 @@
             </div>
         </div>
 
-        <canvas id="canvas" width="720" height="480"></canvas>
+        <canvas id="canvas" width="720" height="480">
+
+        </canvas>
     </div>
 
     <script src="./models/drawable-object.class.js"></script>
@@ -75,11 +90,11 @@
     <script src="./levels/level1.js"></script>
     <script src="./js/game.js"></script>
 
-    <script>
+    <!-- <script>
     document.addEventListener("DOMContentLoaded", (event) => {
         init()
       });
-      </script>
+      </script> -->
 </body>
 </html>
 
@@ -100,4 +115,8 @@
     mozna z niej korzystac innej class.
  
     Kiedy uzywa sie static?
+
+    chcialby to dac do character.class.js
+    //   this.boss.isAttacking = false
+
 -->

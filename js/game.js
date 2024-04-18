@@ -2,7 +2,19 @@ let canvas;
 let world;
 let keyboard = new Keyboards();
 
-function init() {
+
+const startGame = document.querySelector('.start-button')
+const resetGame = document.querySelector('.reset-button')
+
+
+startGame.addEventListener('click', () => {
+    document.querySelector('.start').classList.add('d-none');
+    document.querySelector('.start-button').classList.add('d-none')
     canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);
-}
+})
+
+// function init(params) {
+//     canvas = document.getElementById('canvas');
+//     world = new World(canvas, keyboard);
+// }

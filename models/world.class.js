@@ -30,7 +30,6 @@ class World {
 
   run() {
     setInterval(() => {
-    //   this.boss.isAttacking = false
       this.checkCollisions();
       this.endBossAction();
       // this.ThrowableObject();
@@ -81,6 +80,8 @@ class World {
     }
 
     this.level.enemies.forEach((enemy) => {
+      //tak to zostawic
+      this.boss.isAttacking = false
       if (this.character !== 0) {
         if (this.character.isColliding(enemy)) {
           if (this.character.speedY < 0 && this.character.isAboveGround()) {
@@ -95,6 +96,8 @@ class World {
                 }
               });
             }, 1000);
+
+
           } else {
             if (!enemy.isDead()) {
                 this.boss.isAttacking = true
