@@ -92,7 +92,7 @@ class Character extends MovableObject {
         this.width= 100;
         this.applyGravity();
         this.counterCoint = 0;
-        this.counterBottle = 5;
+        this.counterBottle = 0;
         this.maxCounterBottle = 5;
         this.energy = 100; 
       }

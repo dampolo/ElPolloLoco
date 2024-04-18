@@ -49,65 +49,48 @@ class Endboss extends MovableObject {
     this.loadImages(this.IMAGES_WALKING);
     this.loadImages(this.IMAGES_ATTACK);
     this.y = 140;
-    // this.x = 3690;
-    this.x = 300;
+    this.x = 3690;
 
     this.height = 300;
     this.width = 300;
     this.energy = 25;
-    this.speed = 5;
-    this.isWalking = false;
+    this.speed = 9;
+    this.characterArrived = false;
     this.isAttacking = false;
-    this.turnOffStaying = false;
     this.animate();
   }
 
   animate() {
-    this.isStayingBoss();
+    this.stopFirstAnimation = setInterval(() => {
+      if(this.characterArrived) {
+        this.enterAlertState();
+      }
+    }, 250)
   }
 
-  isStayingBoss() {
+  enterAlertState() {
     // bez this.stayingInterval niedziala poprawnie
+    this.stopEnterAlertState()
     this.stayingInterval = setInterval(() => {
       if(!this.isHurt()) {
         this.playAnimation(this.IMAGES_STAYING);
-        console.log("stay");
       } else {
         this.playAnimation(this.IMAGES_HURT);
-        console.log("hurt");
       }
     }, 250);
 
     setTimeout(() => {
       this.walkingBossWalk()
-    }, 10000)
+    }, 3000)
   }
 
-  isHurtBoss() {
-    this.hurtInterval = setInterval(() => {
-      this.playAnimation(this.IMAGES_HURT);
-      console.log("hurt");
-    }, 250);
-  }
-
-  isWalkingBoss() {
-    this.walkInterval = setInterval(() => {
-      this.playAnimation(this.IMAGES_WALKING);
-      console.log("walk");
-    }, 250);
+  stopEnterAlertState() {
+    clearInterval(this.stopFirstAnimation );
   }
 
   // ale to zakrecone
   stopStayingInterval() {
     clearInterval(this.stayingInterval);
-  }
-
-  stopHurtingInterval() {
-    clearInterval(this.hurtInterval);
-  }
-  stopWalkingInterval() {
-    console.log('stopWalkingInterval');
-    clearInterval(this.walkInterval);
   }
 
   endbossSlower() {
@@ -123,18 +106,19 @@ class Endboss extends MovableObject {
       this.stopStayingInterval();
       this.playAnimation(this.IMAGES_WALKING);
       this.moveLeft();
-      console.log("walkAnimate");
       if(this.isHurt()) {
         this.WalkingBossHurt()
       } else if (this.isDead()) {
         this.playAnimation(this.IMAGES_DEAD)
-      }
+      } else if (this.isAttacking) {
+        this.playAnimation(this.IMAGES_ATTACK)
+        this.y = this.y - 2
+      } 
     }, 250)
   }
 
   WalkingBossHurt() {
     this.endbossSlower()
     this.playAnimation(this.IMAGES_HURT)
-
   }  
 }

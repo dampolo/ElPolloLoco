@@ -50,6 +50,7 @@ isolation: isolate;
 }
 
 h1 {
+    font-size: clamp(1rem, 4vw, 5rem);
     margin-bottom: 2rem;
 }
 
@@ -128,21 +129,27 @@ button {
 
 .buttons-down {
     position: absolute;
-    bottom: 5px;
-    left: 5px;
+    bottom: 0.0654rem;
+    left: 0.3125rem;
     display: flex;
+    justify-content: space-between;
     margin: 1rem;
     gap: 1.25rem;
     z-index: 1;
-    min-width: 680px;
+    width: 100%;
 }
 
-.up {
-    margin-left: auto;
-}
 .buttons-down img {
     width: 30px;
     height: 30px;
+}
+
+.buttons-down-left-side,
+.buttons-down-right-side
+{
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
 }
 
 @media only screen and (max-width: 720px){

@@ -30,6 +30,7 @@ class World {
 
   run() {
     setInterval(() => {
+    //   this.boss.isAttacking = false
       this.checkCollisions();
       this.endBossAction();
       // this.ThrowableObject();
@@ -78,6 +79,7 @@ class World {
     if (this.character.isDead()) {
       return;
     }
+
     this.level.enemies.forEach((enemy) => {
       if (this.character !== 0) {
         if (this.character.isColliding(enemy)) {
@@ -95,8 +97,10 @@ class World {
             }, 1000);
           } else {
             if (!enemy.isDead()) {
+                this.boss.isAttacking = true
+              //uderza Peppe.
               this.character.hit();
-            }
+            } 
             this.healthStatusBarsBlue.setPercentage(this.character.energy);
           }
         }
@@ -133,6 +137,8 @@ class World {
       });
     });
 
+    
+
     //Endboss
     this.throwableObjects.forEach((bottle) => {
       if (this.boss.isColliding(bottle)) {
@@ -143,7 +149,7 @@ class World {
         this.bossStatusbars.setPercentage(this.boss.energy * 4);
 
         bottle.hit();
-
+        
         //Wypierdala flaszki z planszy po rzuceniu na bossa.
         setTimeout(() => {
           this.throwableObjects = this.throwableObjects.filter((el) => {
@@ -207,7 +213,7 @@ class World {
               }
             });
 
-            //Zwiekszamy lisc zebranych butelek
+            //Zwiekszamy ilosc zebranych butelek
             this.character.counterBottle += 1;
             this.updateBottleStatusBar();
           }
@@ -218,11 +224,10 @@ class World {
 
   endBossAction() {
     const endPositionFromStart = 3300;
-    // const endPositionFromStart = -50;
 
     if (this.character.x >= endPositionFromStart) {
       console.log(endPositionFromStart);
-      this.boss.isWalking = true;
+      this.boss.characterArrived = true;
     }
   }
 
