@@ -6,11 +6,13 @@ class World {
   bossStatusbars = new BossStatusbars();
 
   throwableObjects = [];
+  splashedBottle = [];
   level = level1;
   canvas;
   ctx;
   keyboard;
   camera_x = 0;
+  splashedBottle = 0;
 
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
@@ -32,14 +34,12 @@ class World {
     setInterval(() => {
       this.checkCollisions();
       this.endBossAction();
-      // this.ThrowableObject();
     }, 1000 / 25);
 
     setInterval(() => {
-      // this.checkCollisions();
       this.checkThrowableObject();
       this.checkBottleInTheGame();
-    }, 20);
+    }, 175);
   }
 
   checkBottleInTheGame() {
@@ -58,18 +58,21 @@ class World {
     if (this.character.isDead()) {
       return;
     }
+
     if (this.keyboard.D) {
-      if (this.throwableObjects.length === 0) {
-        if (this.character.counterBottle > 0) {
-          let bottle = new ThrowableObject(
-            this.character.x + 40,
-            this.character.y + 120
-          );
-          this.throwableObjects.push(bottle);
-          this.character.counterBottle -= 1;
-          this.updateBottleStatusBar();
-        }
+      // debugger
+      // if (this.throwableObjects.length === 0) {
+      if (this.character.counterBottle > 0) {
+        let bottle = new ThrowableObject(
+          this.character.x + 40,
+          this.character.y + 120
+        );
+        this.throwableObjects.push(bottle);
+        this.splashedBottle++;
+        this.character.counterBottle -= 1;
+        this.updateBottleStatusBar();
       }
+      // }
     }
   }
 
@@ -81,10 +84,10 @@ class World {
 
     this.level.enemies.forEach((enemy) => {
       //tak to zostawic
-      this.boss.isAttacking = false
-      if (this.character !== 0) {
-        if (this.character.isColliding(enemy)) {
-          if (this.character.speedY < 0 && this.character.isAboveGround()) {
+      this.boss.isAttacking = false;
+      if (this.character.isColliding(enemy)) {
+        if (this.character.speedY < 0 && this.character.isAboveGround()) {
+          if (enemy !== this.boss) {
             enemy.hit();
             // wypierdala kurczaki z planszy i pokazuje trupa przez sekunde.
             setTimeout(() => {
@@ -96,21 +99,26 @@ class World {
                 }
               });
             }, 1000);
-
-
-          } else {
-            if (!enemy.isDead()) {
-                this.boss.isAttacking = true
-              //uderza Peppe.
-              this.character.hit();
-            } 
-            this.healthStatusBarsBlue.setPercentage(this.character.energy);
           }
+        } else {
+          if (!enemy.isDead()) {
+            this.boss.isAttacking = true;
+            //uderza Peppe.
+            this.character.hit();
+          }
+          this.healthStatusBarsBlue.setPercentage(this.character.energy);
         }
       }
     });
 
     this.throwableObjects.forEach((bottle) => {
+      // console.log(bottle)
+      //JESTEM TU
+      if (bottle.y > 400) {
+        bottle.hit();
+        bottle.speedY = 0;
+      }
+
       this.level.enemies.forEach((enemy) => {
         if (enemy !== this.boss) {
           if (enemy.isColliding(bottle)) {
@@ -122,27 +130,44 @@ class World {
                 return true;
               }
             });
+            
+            bottle.hit()
+            setTimeout(() => {
+              // Wypierdala flaszki z planszy po rzuceniu na kury.
+              this.throwableObjects = this.throwableObjects.filter((el) => {
+                if (el === bottle) {
+                  return false;
+                } else {
+                  return true;
+                }
+              });
+            }, 200);
           }
 
-          bottle.hit();
-
-          // Wypierdala flaszki z planszy po rzuceniu na kury.
-          setTimeout(() => {
-            this.throwableObjects = this.throwableObjects.filter((el) => {
-              if (el === bottle) {
-                return false;
-              } else {
-                return true;
-              }
-            });
-          }, 1000);
+          if (!bottle.y >= 400) {
+            setTimeout(() => {
+              this.throwableObjects = this.throwableObjects.filter((el) => {
+                if (el === bottle) {
+                  return false;
+                } else {
+                  return true;
+                }
+              });
+            }, 1000);
+          }
         }
       });
     });
 
-    
+       //Endboss
+    this.checkCollisionBossWithBottle();
+    //zbieranie coins
+    this.checkCollisionWithCoin();
+    //zbieranie butelek
+    this.assemblageOfTheBottles();
+  }
 
-    //Endboss
+  checkCollisionBossWithBottle() {
     this.throwableObjects.forEach((bottle) => {
       if (this.boss.isColliding(bottle)) {
         if (!bottle.isDead()) {
@@ -152,7 +177,7 @@ class World {
         this.bossStatusbars.setPercentage(this.boss.energy * 4);
 
         bottle.hit();
-        
+
         //Wypierdala flaszki z planszy po rzuceniu na bossa.
         setTimeout(() => {
           this.throwableObjects = this.throwableObjects.filter((el) => {
@@ -162,7 +187,7 @@ class World {
               return true;
             }
           });
-        }, 1000);
+        }, 300);
 
         if (this.boss.energy === 0) {
           setTimeout(() => {
@@ -178,8 +203,31 @@ class World {
         }
       }
     });
+  }
 
-    //Coins
+  assemblageOfTheBottles() {
+    this.level.bottleBottom.forEach((bottle) => {
+      if (this.character !== 0) {
+        if (this.character.isColliding(bottle)) {
+          // Wypierdala flaszki z planszy po zebraniu
+          if (this.character.counterBottle < this.character.maxCounterBottle) {
+            this.level.bottleBottom = this.level.bottleBottom.filter((el) => {
+              if (el === bottle) {
+                return false;
+              } else {
+                return true;
+              }
+            });
+            //Zwiekszamy ilosc zebranych butelek
+            this.character.counterBottle += 1;
+            this.updateBottleStatusBar();
+          }
+        }
+      }
+    });
+  }
+
+  checkCollisionWithCoin() {
     this.level.coins.forEach((coin) => {
       if (this.character !== 0) {
         if (this.character.isColliding(coin)) {
@@ -202,34 +250,12 @@ class World {
         }
       }
     });
-
-    this.level.bottleBottom.forEach((bottle) => {
-      if (this.character !== 0) {
-        if (this.character.isColliding(bottle)) {
-          // Wypierdala flaszki z planszy po zebraniu
-          if (this.character.counterBottle < this.character.maxCounterBottle) {
-            this.level.bottleBottom = this.level.bottleBottom.filter((el) => {
-              if (el === bottle) {
-                return false;
-              } else {
-                return true;
-              }
-            });
-
-            //Zwiekszamy ilosc zebranych butelek
-            this.character.counterBottle += 1;
-            this.updateBottleStatusBar();
-          }
-        }
-      }
-    });
   }
 
   endBossAction() {
     const endPositionFromStart = 3300;
 
     if (this.character.x >= endPositionFromStart) {
-      console.log(endPositionFromStart);
       this.boss.characterArrived = true;
     }
   }

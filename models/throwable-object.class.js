@@ -15,13 +15,21 @@ class ThrowableObject extends MovableObject {
     "img/6_salsa_bottle/bottle_rotation/bottle_splash/6_bottle_splash.png",
   ];
 
-  constructor(x, y) {
+  offset = {
+    top: 10,
+    left: 10,
+    right: 10,
+    bottom: 10
+};
+
+  constructor(x, y, value) {
     super()
     this.loadImage("img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png");
     this.loadImages(this.IMAGES_BOTTLE);
     this.loadImages(this.IMAGES_BOTTLE_SPLASH);
     this.x = x;
     this.y = y;
+    // this.value = value
     this.height = 50;
     this.width = 50;
     this.energy = 5;
@@ -51,7 +59,6 @@ class ThrowableObject extends MovableObject {
   animate() {
     setInterval(() => {
       if (this.isDead()) {
-        //jak flaszka jest martwa, czemu nie dziala this.energy === 0
         this.playAnimation(this.IMAGES_BOTTLE_SPLASH);
       } else {
         this.playAnimation(this.IMAGES_BOTTLE);

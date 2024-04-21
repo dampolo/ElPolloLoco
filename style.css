@@ -95,7 +95,7 @@ button {
     border-radius: 1rem;
     position: absolute;
     z-index: 3;
-    display: flex;
+    display: none;
 }
 
 .game-over {
@@ -106,12 +106,16 @@ button {
     background-size: 720px 480px;
     border-radius: 1rem;
     position: absolute;
-    display: none;
+    display: flex;
     z-index: 5;
 }
 
 .d-none {
     display: none;
+}
+
+.d-flex {
+    display: flex;
 }
 
 .play-game {
@@ -134,11 +138,9 @@ button {
 
 .buttons-down {
     position: absolute;
-    bottom: 0.0654rem;
-    left: 0.3125rem;
+    bottom: 1rem;
     display: flex;
     justify-content: space-between;
-    margin: 1rem;
     gap: 1.25rem;
     z-index: 1;
     width: 100%;
@@ -155,6 +157,7 @@ button {
     display: flex;
     justify-content: space-between;
     gap: 1rem;
+    margin-inline: 1rem;
 }
 
 

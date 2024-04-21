@@ -69,8 +69,14 @@ class Character extends MovableObject {
         'img/9_intro_outro_screens/game_over/game over.png'
     ]
 
-    world;
+    offset = {
+        top: 10,
+        left: 10,
+        right: 10,
+        bottom: 10
+    };
 
+    world;
     walkingSound = new Audio('./audio/walk.mp3')
 
     constructor() {
@@ -94,7 +100,7 @@ class Character extends MovableObject {
         this.counterCoint = 0;
         this.counterBottle = 0;
         this.maxCounterBottle = 5;
-        this.energy = 1000; 
+        this.energy = 100; 
       }
 
 
@@ -148,6 +154,8 @@ class Character extends MovableObject {
 
         setInterval(() => {
             if(this.isDead()) {
+                document.querySelector('.game-over').classList.remove('d-none')
+
                 return;
             }
             if (this.isHurt()) {

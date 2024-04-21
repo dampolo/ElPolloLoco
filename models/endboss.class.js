@@ -40,6 +40,13 @@ class Endboss extends MovableObject {
     "img/4_enemie_boss_chicken/3_attack/G20.png",
   ];
 
+  offset = {
+    top: 40,
+    left: 40,
+    right: 40,
+    bottom: 40
+};
+
   constructor() {
     super();
     this.loadImage(this.IMAGES_STAYING[0]);
@@ -54,7 +61,7 @@ class Endboss extends MovableObject {
     this.height = 300;
     this.width = 300;
     this.energy = 25;
-    this.speed = 9;
+    this.speed = 15;
     this.characterArrived = false;
     this.isAttacking = false;
     this.animate();
@@ -113,6 +120,7 @@ class Endboss extends MovableObject {
         this.playAnimation(this.IMAGES_DEAD)
       } else if (this.isAttacking) {
         this.playAnimation(this.IMAGES_ATTACK)
+        console.log('attack');
       } 
     }, 250)
   }

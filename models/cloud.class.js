@@ -7,7 +7,7 @@ class Cloud extends MovableObject{
     constructor(y) {
         super().loadImage(this.CLOUD_IMAGES);
         this.loadImages(this.CLOUD_IMAGES);
-        this.y = y;
+        this.y = y + Math.random() * 50;
         this.x = -1000 + Math.random() * 5000;
         this.height = 200;
         this.width = 500;

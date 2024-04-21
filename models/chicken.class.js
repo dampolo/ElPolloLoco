@@ -9,6 +9,13 @@ class Chicken extends MovableObject {
         'img/3_enemies_chicken/chicken_normal/2_dead/dead.png',
     ]
 
+    offset = {
+        top: 10,
+        left: 10,
+        right: 10,
+        bottom: 10
+    };
+
     constructor() {
         super().loadImage(this.IMAGES_WALKING[0]); //Musi to tak byc z tym super?
         this.loadImages(this.IMAGES_WALKING)
