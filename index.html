@@ -15,6 +15,12 @@
     
     
     <div class="play-game">
+
+        <div class="info">
+            <h1>
+                Please rotate your device.
+            </h1>
+        </div>
         
         <div class="start">
 
@@ -28,16 +34,16 @@
             <button class="start-button">
                 <img src="./img/10_icons/start.svg" alt="" srcset="">
             </button>
-            <button class="reset-button">
+            <button class="reset-button d-none">
                 <img src="./img/10_icons/reset.svg" alt="" srcset="">
             </button>
-            <button>
+            <button class="music-on" data-set="on">
+                <img src="./img/10_icons/volume.svg" alt="" srcset="">
+            </button>
+            <button class="music-off d-none">
                 <img src="./img/10_icons/volume-off.svg" alt="" srcset="">
             </button>
     
-            <button>
-                <img src="./img/10_icons/volume.svg" alt="" srcset="">
-            </button>
         </div>
     
         <div class="buttons-down">
@@ -63,6 +69,39 @@
         <canvas id="canvas" width="720" height="480">
 
         </canvas>
+
+    </div>
+
+    <div class="description">
+        <div class="button-description">
+
+            <h3>HOW TO PLAY:</h3>
+            <button class="">
+                <img src="./img/10_icons/left.svg" alt="" srcset="">
+            </button>
+            <h4>wolk left</h4>
+            <button class="">
+                <img src="./img/10_icons/right.svg" alt="" srcset="">
+            </button>
+            <h4>wlak right</h4>
+            <button class="">
+                <img src="./img/10_icons/up.svg" alt="" srcset="">
+            </button>
+            <h4>jump[D]</h4>
+            <button class="">
+                <img src="./img/6_salsa_bottle/salsa_bottle.png" alt="" srcset="">
+            </button>
+            <h4>throw bottle [space]</h4>
+        </div>
+
+        <div class="game-description">
+            <h3>Note:</h3>
+            <div class="game-description-text">
+                <h4>Kill a normal chickens by jumping on it or throwing bottle at it.</h4>
+                <h4>Kill the baby by jumping on it or throwing bottle at it.</h4>
+                <h4>Kill the Endboss by throwing multiple bottles at it.</h4>
+            </div>
+        </div>
     </div>
 
     <script src="./models/drawable-object.class.js"></script>
@@ -90,11 +129,11 @@
     <script src="./levels/level1.js"></script>
     <script src="./js/game.js"></script>
 
-    <script>
+    <!-- <script>
     document.addEventListener("DOMContentLoaded", (event) => {
         init()
       });
-      </script>
+      </script> -->
 </body>
 </html>
 

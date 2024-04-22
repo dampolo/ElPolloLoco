@@ -66,6 +66,13 @@ body {
     background-size: cover;
 }
 
+/* for all screens */
+.info {
+    display: none;
+    opacity: 0;
+    transition: all 1s ease-out;   
+}
+
 canvas {
     position: relative;
     background-color: black;
@@ -87,15 +94,15 @@ button {
 }
 
 .start {
-    width: 45rem;
-    height: 480px;
+    display: flex;
+    position: absolute;
     background: url('./img/9_intro_outro_screens/start/startscreen_1.png');
     background-repeat: no-repeat;
     background-size: 720px 480px;
+    width: 45rem;
+    height: 480px;
     border-radius: 1rem;
-    position: absolute;
     z-index: 3;
-    display: none;
 }
 
 .game-over {
@@ -160,10 +167,43 @@ button {
     margin-inline: 1rem;
 }
 
+.description {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 1rem;
+    gap: 2rem;
+}
+
+.game-description,
+.button-description {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+h4 {
+    font-size: clamp(1rem, 4vw, 1.2rem);
+}
 
 @media only screen and (max-width: 720px){
     canvas {
         width: 100%;
+    }
+
+    .info {
+        background-color: rgb(253,181,80);
+        z-index: 999;
+        position: fixed;
+        max-width: 100%;
+        min-height: 100vh;
+        opacity: 1;
+        inset: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 }
 

@@ -61,7 +61,7 @@ class Endboss extends MovableObject {
     this.height = 300;
     this.width = 300;
     this.energy = 25;
-    this.speed = 15;
+    this.speed = 20;
     this.characterArrived = false;
     this.isAttacking = false;
     this.animate();
