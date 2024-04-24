@@ -3,6 +3,7 @@
 */
 *, *::before, *::after {
 box-sizing: border-box;
+/* border: solid 1px; */
 }
 /*
 2. Remove default margin
@@ -117,6 +118,18 @@ button {
     z-index: 5;
 }
 
+.you-won {
+    width: 45rem;
+    height: 480px;
+    background: url('./img/9_intro_outro_screens/start/you-won.png');
+    background-repeat: no-repeat;
+    background-size: 720px 480px;
+    border-radius: 1rem;
+    position: absolute;
+    display: flex;
+    z-index: 5;
+}
+
 .d-none {
     display: none;
 }
@@ -134,13 +147,28 @@ button {
 
 .buttons-top {
     position: absolute;
-    top: 5px;
-    right: 5px;
+    top: 1rem;
     display: flex;
-    align-self: flex-end;
-    margin: 1rem;
+    justify-content: space-between;
     gap: 1.25rem;
+    z-index: 1;
+    width: 100%;
     z-index: 5;
+}
+
+.info-button {
+    display: none;
+}
+
+.buttons-top-left-side,
+.buttons-top-right-side,
+.buttons-down-left-side,
+.buttons-down-right-side
+{
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-inline: 1rem;
 }
 
 .buttons-down {
@@ -158,17 +186,9 @@ button {
     height: 30px;
 }
 
-.buttons-down-left-side,
-.buttons-down-right-side
-{
-    display: flex;
-    justify-content: space-between;
-    gap: 1rem;
-    margin-inline: 1rem;
-}
-
 .description {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: clamp(1rem, 4vw, 2rem);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -181,6 +201,7 @@ button {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-wrap: wrap;
     gap: 1rem;
 }
 
@@ -192,8 +213,13 @@ h4 {
     canvas {
         width: 100%;
     }
+    .info-button {
+        display: flex;
+    }
+}
 
-    .info {
+@media(max-width: 720px) and (min-height: 400px) {
+    /* .info {
         background-color: rgb(253,181,80);
         z-index: 999;
         position: fixed;
@@ -204,7 +230,7 @@ h4 {
         display: flex;
         justify-content: center;
         align-items: center;
-    }
+    } */
 }
 
 @media only screen and (max-height: 480px) {

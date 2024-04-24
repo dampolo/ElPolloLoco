@@ -56,7 +56,7 @@ class Endboss extends MovableObject {
     this.loadImages(this.IMAGES_WALKING);
     this.loadImages(this.IMAGES_ATTACK);
     this.y = 140;
-    this.x = 3690;
+    this.x = 3590;
 
     this.height = 300;
     this.width = 300;
@@ -115,17 +115,21 @@ class Endboss extends MovableObject {
       this.y = this.y;
       this.moveLeft();
       if(this.isHurt()) {
-        this.WalkingBossHurt()
+        this.walkingBossHurt()
       } else if (this.isDead()) {
         this.playAnimation(this.IMAGES_DEAD)
+
+        setTimeout(() => {
+          document.querySelector('.you-won').classList.remove('d-none')
+        }, 300)
+
       } else if (this.isAttacking) {
         this.playAnimation(this.IMAGES_ATTACK)
-        console.log('attack');
       } 
     }, 250)
   }
 
-  WalkingBossHurt() {
+  walkingBossHurt() {
     this.endbossSlower()
     this.playAnimation(this.IMAGES_HURT)
   }  

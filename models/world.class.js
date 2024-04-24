@@ -8,12 +8,12 @@ class World {
   throwableObjects = [];
   splashedBottle = [];
   level = level1;
-  canvas;
+  canvas
   ctx;
   keyboard;
   camera_x = 0;
   splashedBottle = 0;
-
+  
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
     this.canvas = canvas;
@@ -24,7 +24,10 @@ class World {
     this.run();
     //Czemu to jes tu.
     this.boss = this.level.enemies[this.level.enemies.length - 1];
+    this.isGameOn = true
+    this.sound = null
   }
+
 
   setWorld() {
     this.character.world = this;
@@ -53,28 +56,39 @@ class World {
   }
 
   checkThrowableObject() {
-    //Tu rzucam flaszki
+  //Tu rzucam flaszki
 
-    if (this.character.isDead()) {
+  if (this.character.isDead()) {
       return;
-    }
-
-    if (this.keyboard.D) {
-      // debugger
-      // if (this.throwableObjects.length === 0) {
-      if (this.character.counterBottle > 0) {
-        let bottle = new ThrowableObject(
-          this.character.x + 40,
-          this.character.y + 120
-        );
-        this.throwableObjects.push(bottle);
-        this.splashedBottle++;
-        this.character.counterBottle -= 1;
-        this.updateBottleStatusBar();
-      }
-      // }
-    }
   }
+
+  if (this.keyboard.D) {
+      if (this.character.counterBottle > 0) {
+          let bottle = new ThrowableObject(
+              this.character.x + 40,
+              this.character.y + 120
+          );
+
+          if (this.throwableObjects.length === 0) {
+
+            this.throwableObjects.push(bottle);
+            this.splashedBottle++;
+            this.character.counterBottle -= 1;
+            this.updateBottleStatusBar();
+
+          } else {
+              this.throwableObjects.forEach((el) => {
+                  if (el.energy === 0) {
+                      this.throwableObjects.push(bottle);
+                      this.splashedBottle++;
+                      this.character.counterBottle -= 1;
+                      this.updateBottleStatusBar();
+                  }
+              });
+          }
+      }
+  }
+}
 
   //Chicken, Chicken-baby
   checkCollisions() {
@@ -253,7 +267,7 @@ class World {
   }
 
   endBossAction() {
-    const endPositionFromStart = 3300;
+    const endPositionFromStart = 3100;
 
     if (this.character.x >= endPositionFromStart) {
       this.boss.characterArrived = true;
@@ -267,11 +281,11 @@ class World {
   }
   //  filter zwraca nowy array.
 
+
   draw() {
     //all delate
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     this.ctx.translate(this.camera_x, 0);
-
     this.addObjectToMap(this.level.backgroundObjects);
     this.addObjectToMap(this.level.clouds);
     this.addObjectToMap(this.level.enemies);

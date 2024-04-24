@@ -26,23 +26,38 @@
 
         </div>
 
+        <div class="you-won d-none">
+
+        </div>
+
         <div class="game-over d-none">
 
         </div>
 
         <div class="buttons-top">
-            <button class="start-button">
-                <img src="./img/10_icons/start.svg" alt="" srcset="">
-            </button>
-            <button class="reset-button d-none">
-                <img src="./img/10_icons/reset.svg" alt="" srcset="">
-            </button>
-            <button class="music-on" data-set="on">
-                <img src="./img/10_icons/volume.svg" alt="" srcset="">
-            </button>
-            <button class="music-off d-none">
-                <img src="./img/10_icons/volume-off.svg" alt="" srcset="">
-            </button>
+            <div class="buttons-top-left-side">
+                <button class="info-button">
+                    <img src="./img/10_icons/info.svg" alt="" srcset="">
+                </button>
+            </div>
+            <div class="buttons-top-right-side">
+                <button class="break-button d-none">
+                    <img src="./img/10_icons/break.svg" alt="" srcset="">
+                </button>
+
+                <button class="start-button">
+                    <img src="./img/10_icons/start.svg" alt="" srcset="">
+                </button>
+                <button class="reset-button d-none">
+                    <img src="./img/10_icons/reset.svg" alt="" srcset="">
+                </button>
+                <button class="music-on" data-set="on">
+                    <img src="./img/10_icons/volume.svg" alt="" srcset="">
+                </button>
+                <button class="music-off d-none">
+                    <img src="./img/10_icons/volume-off.svg" alt="" srcset="">
+                </button>
+            </div>
     
         </div>
     
@@ -75,15 +90,15 @@
     <div class="description">
         <div class="button-description">
 
-            <h3>HOW TO PLAY:</h3>
+            <h4>HOW TO PLAY:</h4>
             <button class="">
                 <img src="./img/10_icons/left.svg" alt="" srcset="">
             </button>
-            <h4>wolk left</h4>
+            <h4>walk left</h4>
             <button class="">
                 <img src="./img/10_icons/right.svg" alt="" srcset="">
             </button>
-            <h4>wlak right</h4>
+            <h4>walk right</h4>
             <button class="">
                 <img src="./img/10_icons/up.svg" alt="" srcset="">
             </button>
@@ -95,7 +110,7 @@
         </div>
 
         <div class="game-description">
-            <h3>Note:</h3>
+            <h4>Note:</h4>
             <div class="game-description-text">
                 <h4>Kill a normal chickens by jumping on it or throwing bottle at it.</h4>
                 <h4>Kill the baby by jumping on it or throwing bottle at it.</h4>
@@ -128,12 +143,6 @@
     <script src="./models/throwable-object.class.js"></script>
     <script src="./levels/level1.js"></script>
     <script src="./js/game.js"></script>
-
-    <!-- <script>
-    document.addEventListener("DOMContentLoaded", (event) => {
-        init()
-      });
-      </script> -->
 </body>
 </html>
 
