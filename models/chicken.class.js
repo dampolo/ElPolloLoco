@@ -33,7 +33,7 @@ class Chicken extends MovableObject {
     setInterval(() => {
       // debugger
 
-      if (this.isGameOn !== undefined) {
+      if (this.world !== undefined) {
         if (this.world.isGameOn === false) {
           return;
         }
