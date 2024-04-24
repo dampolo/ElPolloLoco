@@ -219,7 +219,7 @@ h4 {
 }
 
 @media(max-width: 720px) and (min-height: 400px) {
-    /* .info {
+    .info {
         background-color: rgb(253,181,80);
         z-index: 999;
         position: fixed;
@@ -230,7 +230,7 @@ h4 {
         display: flex;
         justify-content: center;
         align-items: center;
-    } */
+    }
 }
 
 @media only screen and (max-height: 480px) {
