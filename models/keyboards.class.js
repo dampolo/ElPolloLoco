@@ -73,6 +73,7 @@ class Keyboards {
             }
         
             if(e.keyCode === 32) {
+                e.preventDefault()
                 this.SPACE = true;
             }
             if(e.keyCode === 68) {

@@ -5,15 +5,15 @@ class Coins extends MovableObject {
     ]
 
     offset = {
-        top: 25,
-        left: 25,
-        right: 25,
-        bottom: 25,
+        top: 35,
+        left: 35,
+        right: 35,
+        bottom: 35,
     };
 
     constructor(x, y) {
-        super().loadImage(this.IMAGES_COINS[0]);
-
+        super()
+        this.loadImage(this.IMAGES_COINS[0]);
         this.loadImages(this.IMAGES_COINS)
         this.x = x;
         this.y = y;
@@ -24,6 +24,11 @@ class Coins extends MovableObject {
 
     animate() {
         setInterval(() => {
+
+                if (isGameOn === false) {
+                  return;
+                }
+
             this.playAnimation(this.IMAGES_COINS)
         }, 250 + Math.random() * 100);
     }

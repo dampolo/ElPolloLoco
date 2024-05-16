@@ -1,4 +1,7 @@
 class ThrowableObject extends MovableObject {
+
+  // newWorld = new World
+
   IMAGES_BOTTLE = [
     "img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png",
     "img/6_salsa_bottle/bottle_rotation/2_bottle_rotation.png",
@@ -22,17 +25,19 @@ class ThrowableObject extends MovableObject {
     bottom: 10
 };
 
-  constructor(x, y, value) {
+  constructor(x, y) {
     super()
     this.loadImage("img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png");
     this.loadImages(this.IMAGES_BOTTLE);
     this.loadImages(this.IMAGES_BOTTLE_SPLASH);
     this.x = x;
     this.y = y;
-    // this.value = value
     this.height = 50;
     this.width = 50;
     this.energy = 5;
+    this.bottleIsSplashingOnce = true;
+    this.bottleIsFlyingOnce = true
+
     this.throw();
     this.animate();
   }
@@ -40,10 +45,12 @@ class ThrowableObject extends MovableObject {
   throw() {
     this.speedY = 20;
     this.applyGravity();
-
     const direction = world.character.otherDirection;
 
     setInterval(() => {
+      if (isGameOn === false) {
+        return;
+      }
       if(!direction) { //kierunek butelek w prawo
         if (!this.isDead()) {
           this.x += 25;
@@ -60,8 +67,17 @@ class ThrowableObject extends MovableObject {
     setInterval(() => {
       if (this.isDead()) {
         this.playAnimation(this.IMAGES_BOTTLE_SPLASH);
+        if(this.bottleIsSplashingOnce) {
+          soundManager.playSound("bottleCrash")
+        }
+        //Czemu to dziala???????
+        this.bottleIsSplashingOnce = false
       } else {
         this.playAnimation(this.IMAGES_BOTTLE);
+        if(this.bottleIsFlyingOnce) {
+            soundManager.playSound("flyingBottle")
+        }
+        this.bottleIsFlyingOnce = false
       }
     }, 50);
   }

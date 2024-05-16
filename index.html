@@ -1,123 +1,240 @@
 <!DOCTYPE html>
 <html lang="en" translate="no">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>El Pollo Loco</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://use.typekit.net/iwb4juf.css">
-    
-    <link rel="shortcut icon" href="./img/2_character_pepe/1_idle/idle/I-1.png" type="image/x-icon">
-</head>
-<body>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="https://use.typekit.net/iwb4juf.css" />
+
+    <link
+      rel="shortcut icon"
+      href="./img/2_character_pepe/1_idle/idle/I-1.png"
+      type="image/x-icon"
+    />
+  </head>
+  <body>
+
+    <!-- <embed src="./audio/Godfather.mp3" width="180" height="90" loop="false" autostart="false" hidden="true"/> -->
+
     <h1>El Pollo Loco</h1>
-    
-    
-    
-    <div class="play-game">
 
+      <div class="play-game">
         <div class="info">
-            <h1>
-                Please rotate your device.
-            </h1>
+          <h1>Please rotate your device.</h1>
+          <img src="./img/10_icons/screen_rotation_rotation.png" alt="" srcset="">
         </div>
-        
-        <div class="start">
 
-        </div>
+        <div class="start"></div>
 
         <div class="you-won d-none">
-
+          <button class="play-again-you-won">PLAY AGAIN?</button>
         </div>
 
         <div class="game-over d-none">
-
+          <button class="play-again">PLAY AGAIN?</button>
         </div>
-
+        
         <div class="buttons-top">
-            <div class="buttons-top-left-side">
-                <button class="info-button">
-                    <img src="./img/10_icons/info.svg" alt="" srcset="">
-                </button>
-            </div>
-            <div class="buttons-top-right-side">
-                <button class="break-button d-none">
-                    <img src="./img/10_icons/break.svg" alt="" srcset="">
-                </button>
+          
+            <button class="break-button d-none">
+              <img src="./img/10_icons/break.svg" alt="" srcset="" />
+            </button>
 
-                <button class="start-button">
-                    <img src="./img/10_icons/start.svg" alt="" srcset="">
-                </button>
-                <button class="reset-button d-none">
-                    <img src="./img/10_icons/reset.svg" alt="" srcset="">
-                </button>
-                <button class="music-on" data-set="on">
-                    <img src="./img/10_icons/volume.svg" alt="" srcset="">
-                </button>
-                <button class="music-off d-none">
-                    <img src="./img/10_icons/volume-off.svg" alt="" srcset="">
-                </button>
-            </div>
-    
-        </div>
-    
-        <div class="buttons-down">
-            <div class="buttons-down-left-side">
-                <button class="left">
-                    <img src="./img/10_icons/left.svg" alt="" srcset="">
-                </button>
-                <button class="right">
-                    <img src="./img/10_icons/right.svg" alt="" srcset="">
-                </button>
-            </div>
+            <button class="start-button-break d-none">
+              <img src="./img/10_icons/start.svg" alt="" srcset="" />
+            </button>
 
-            <div class="buttons-down-right-side">     
-                <button class="up">
-                    <img src="./img/10_icons/up.svg" alt="" srcset="">
-                </button>
-                <button class="bottle">
-                    <img src="./img/6_salsa_bottle/salsa_bottle.png" alt="" srcset="">
-                </button>
-            </div>
+            <button class="start-button">
+              <img src="./img/10_icons/start.svg" alt="" srcset="" />
+            </button>
+            <button class="reset-button d-none">
+              <img src="./img/10_icons/reset.svg" alt="" srcset="" />
+            </button>
+            <button class="music-on">
+              <img src="./img/10_icons/volume.svg" alt="" srcset="" />
+            </button>
+            <button class="music-off d-none">
+              <img src="./img/10_icons/volume-off.svg" alt="" srcset="" />
+            </button>
+            <button class="maximize d-none">
+              <img src="./img/10_icons/maximize.svg" alt="" srcset="" />
+            </button>
+            <button class="maximize-off d-none">
+              <img src="./img/10_icons/maximize-off.svg" alt="" srcset="" />
+            </button>
         </div>
 
-        <canvas id="canvas" width="720" height="480">
+        <!-- Info on the canvas -->
+          <div class="description-on-canvas d-none">
+            <div class="description-on-canvas-content">
+              <div class="close-button">
+                    <button class="close">
+                        <img src="./img/10_icons/x.svg" alt="" srcset="" />
+                    </button>
+                </div>
+            <div class="button-description-on-canvas">
+            <div>
+                <h4>How to play:</h4>
+            </div>
+            <div class="description-how-to-play">
 
-        </canvas>
+              <div>
+                <button class="">
+                  <img src="./img/10_icons/info.svg" alt="" srcset="" />
+                </button>
+                <h5>Info</h5>
+              </div>
+                
+              <div>
+                <button class="">
+                  <img src="./img/10_icons/start.svg" alt="" srcset="" />
+                </button>
+                <h5>Start Game</h5>
+              </div>
 
-    </div>
+                  <div>
+                    <button class="">
+                      <img src="./img/10_icons/reset.svg" alt="" srcset="" />
+                    </button>
+                    <h5>reset of the game/start again</h5>
+                  </div>
+                  
+                  <div>
+                    <button class="">
+                      <img src="./img/10_icons/left.svg" alt="" srcset="" />
+                    </button>
+                    <h5>walk left</h5>
+                  </div>
+                
+                <div></div>
+                <button class="">
+                  <img src="./img/10_icons/right.svg" alt="" srcset="" />
+                </button>
+                <h5>walk right</h5>
+                
+                <div></div>
+                <button class="">
+                  <img src="./img/10_icons/up.svg" alt="" srcset="" />
+                </button>
+                <h5>jump[space]</h5>
+                
+                <div></div>
+                <button class="">
+                  <img src="./img/6_salsa_bottle/salsa_bottle.png" alt="" srcset="" />
+                </button>
+                <h5>throw bottle [D]</h5>
+              </div>
+            </div>
+    
 
-    <div class="description">
+            <div class="game-description-text">
+              <h4>Note:</h4>
+                <h5>
+                  Kill a normal chickens by jumping on it or throwing bottle at it.
+                </h5>
+                <h5>Kill the baby by jumping on it or throwing bottle at it.</h5>
+                <h5>Kill the Endboss by throwing multiple bottles at it.</h5>
+            </div>
+            </div>
+          </div>
+        
+        <div class="buttons-bottom">
+          <div class="buttons-bottom-left-side">
+            <button class="left">
+                <img src="./img/10_icons/left.svg" alt="" srcset="" />
+              </button>
+            <button class="right">
+              <img src="./img/10_icons/right.svg" alt="" srcset="" />
+            </button>
+          </div>
+
+          <button class="info-button-bottom">
+            <img src="./img/10_icons/info.svg" alt="" srcset="" />
+          </button>
+
+          <div class="buttons-bottom-right-side">
+            <button class="up">
+              <img src="./img/10_icons/up.svg" alt="" srcset="" />
+            </button>
+            <button class="bottle">
+              <img
+                src="./img/6_salsa_bottle/salsa_bottle.png"
+                alt=""
+                srcset=""
+              />
+            </button>
+          </div>
+        </div>
+
+        <canvas id="canvas" width="720" height="480"> </canvas>
+      </div>
+      <!-- Info on the bottom -->
+      <div class="description">
         <div class="button-description">
+          <h4>How to play:</h4>
+          
+          <div>
+            <button class="">
+              <img src="./img/10_icons/info.svg" alt="" srcset="" />
+            </button>
+            <h4>Info</h4><br>
+          </div>
 
-            <h4>HOW TO PLAY:</h4>
+          <div>
             <button class="">
-                <img src="./img/10_icons/left.svg" alt="" srcset="">
+              <img src="./img/10_icons/start.svg" alt="" srcset="" />
             </button>
-            <h4>walk left</h4>
+            <h4>Start Game</h4><br>
+          </div>
+          
+          <div>
             <button class="">
-                <img src="./img/10_icons/right.svg" alt="" srcset="">
+              <img src="./img/10_icons/reset.svg" alt="" srcset="" />
             </button>
-            <h4>walk right</h4>
+            <h4>reset of the game/start again</h4><br>
+          </div>
+
+          <div>
             <button class="">
-                <img src="./img/10_icons/up.svg" alt="" srcset="">
+              <img src="./img/10_icons/left.svg" alt="" srcset="" />
             </button>
-            <h4>jump[space]</h4>
+            <h4>walk left</h4><br>
+          </div>
+
+          <div>
             <button class="">
-                <img src="./img/6_salsa_bottle/salsa_bottle.png" alt="" srcset="">
+              <img src="./img/10_icons/right.svg" alt="" srcset="" />
+            </button>
+            <h4>walk right</h4><br>
+          </div>
+
+          <div>
+            <button class="">
+              <img src="./img/10_icons/up.svg" alt="" srcset="" />
+            </button>
+            <h4>jump[space]</h4><br>
+          </div>
+
+          <div>
+            <button class="">
+              <img src="./img/6_salsa_bottle/salsa_bottle.png" alt="" srcset="" />
             </button>
             <h4>throw bottle [D]</h4>
+          </div>
         </div>
 
         <div class="game-description">
-            <h4>Note:</h4>
-            <div class="game-description-text">
-                <h4>Kill a normal chickens by jumping on it or throwing bottle at it.</h4>
-                <h4>Kill the baby by jumping on it or throwing bottle at it.</h4>
-                <h4>Kill the Endboss by throwing multiple bottles at it.</h4>
-            </div>
+          <h4>Note:</h4>
+          <div class="game-description-text">
+            <h4>
+              Kill a normal chickens by jumping on it or throwing bottle at it.
+            </h4>
+            <h4>Kill the baby by jumping on it or throwing bottle at it.</h4>
+            <h4>Kill the Endboss by throwing multiple bottles at it.</h4>
+          </div>
         </div>
-    </div>
+      </div>
 
     <script src="./models/drawable-object.class.js"></script>
     <script src="./models/movable-object.class.js"></script>
@@ -125,46 +242,26 @@
     <script src="./models/chicken.class.js"></script>
     <script src="./models/chicken-baby.class.js"></script>
 
-    
     <script src="./models/cloud.class.js"></script>
     <script src="./models/character-bar.class.js"></script>
+
     <script src="./models/coin-bar.class.js"></script>
     <script src="./models/bottle-bar.class.js"></script>
     <script src="./models/boss-bar.class.js"></script>
     <script src="./models/coins.class.js"></script>
     <script src="./models/bottle-bottom.class.js"></script>
-    
-    
     <script src="./models/world.class.js"></script>
+
     <script src="./models/keyboards.class.js"></script>
+    <script src="./models/music.class.js"></script>
+    
     <script src="./models/background.class.js"></script>
     <script src="./models/level.class.js"></script>
     <script src="./models/endboss.class.js"></script>
     <script src="./models/throwable-object.class.js"></script>
     <script src="./levels/level1.js"></script>
+
     <script src="./js/game.js"></script>
-</body>
+  </body>
 </html>
 
-<!-- Pytania:
-    1.    bottle-bottom.class.js
-    this.IMAGES_BOTTLE[displayBottle()]
-
-    2. Mozna extends zrobic z 2 class. > nie ma
-
-
-    3. Nie potrzebujesz w super() parametra z aktualnej 
-    class bo on juz jest w tej class,
-    W super() potrzebujesz parameter z class parent
- 
-
-    Constructor:
-    Funkcje mozna tez dac do constructora ale wtedy nie 
-    mozna z niej korzystac innej class.
- 
-    Kiedy uzywa sie static?
-
-    chcialby to dac do character.class.js
-    //   this.boss.isAttacking = false
-
--->

@@ -17,10 +17,17 @@ class Cloud extends MovableObject{
     }
     animate() {
         setInterval(() => {
+            if (isGameOn === false) {
+                return;
+              }
             this.moveLeft()
         }, 1000 / 60);
 
         setInterval(() => {
+
+            if (isGameOn === false) {
+                return;
+              }
             this.playAnimation(this.CLOUD_IMAGES) 
         }, 250);
     }

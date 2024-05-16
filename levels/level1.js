@@ -1,6 +1,7 @@
 let level1;
 
 function initLevel() {
+  
   level1 = new Level(
     [
       new Chicken(),
@@ -27,7 +28,7 @@ function initLevel() {
       new Cloud(20),
       new Cloud(25),
       new Cloud(30),
-
+      
       new Cloud(0),
       new Cloud(5),
       new Cloud(10),

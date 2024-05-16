@@ -29,13 +29,23 @@ class ChickenBaby extends MovableObject {
   }
 
   animate() {
+
+    
+
     setInterval(() => {
+      if (isGameOn === false) {
+        return;
+      }
       if (!this.isDead()) {
         this.moveLeft();
       }
     }, 1000 / 60);
 
     setInterval(() => {
+
+      if (isGameOn === false) {
+        return;
+      }
       if (!this.isDead()) {
         this.playAnimation(this.IMAGES_WALKING);
       } else {

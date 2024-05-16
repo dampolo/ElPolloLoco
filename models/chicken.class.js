@@ -17,7 +17,8 @@ class Chicken extends MovableObject {
   world;
 
   constructor() {
-    super().loadImage(this.IMAGES_WALKING[0]); //Musi to tak byc z tym super?
+    super();
+    this.loadImage(this.IMAGES_WALKING[0]); //Musi to tak byc z tym super?
     this.loadImages(this.IMAGES_WALKING);
     this.loadImage(this.IMAGES_DEAD[0]);
     this.y = 350;
@@ -33,10 +34,8 @@ class Chicken extends MovableObject {
     setInterval(() => {
       // debugger
 
-      if (this.world !== undefined) {
-        if (this.world.isGameOn === false) {
-          return;
-        }
+      if (isGameOn === false) {
+        return;
       }
 
       if (!this.isDead()) {
@@ -45,6 +44,9 @@ class Chicken extends MovableObject {
     }, 1000 / 60);
 
     setInterval(() => {
+      if (isGameOn === false) {
+        return;
+      }
       if (!this.isDead()) {
         this.playAnimation(this.IMAGES_WALKING);
       } else {

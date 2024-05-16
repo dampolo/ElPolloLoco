@@ -43,9 +43,9 @@ class Endboss extends MovableObject {
   offset = {
     top: 40,
     left: 40,
-    right: 40,
-    bottom: 40
-};
+    right: 20,
+    bottom: 20,
+  };
 
   constructor() {
     super();
@@ -56,7 +56,7 @@ class Endboss extends MovableObject {
     this.loadImages(this.IMAGES_WALKING);
     this.loadImages(this.IMAGES_ATTACK);
     this.y = 140;
-    this.x = 3590;
+    this.x = 3700;
 
     this.height = 300;
     this.width = 300;
@@ -64,22 +64,28 @@ class Endboss extends MovableObject {
     this.speed = 20;
     this.characterArrived = false;
     this.isAttacking = false;
+    this.playOnlyOnce = true;
+    this.directionLeft = true
     this.animate();
   }
 
   animate() {
     this.stopFirstAnimation = setInterval(() => {
-      if(this.characterArrived) {
+      if (this.characterArrived) {
         this.enterAlertState();
       }
-    }, 250)
+    }, 250);
   }
 
   enterAlertState() {
     // bez this.stayingInterval niedziala poprawnie
-    this.stopEnterAlertState()
+    this.stopEnterAlertState();
     this.stayingInterval = setInterval(() => {
-      if(!this.isHurt()) {
+      if (isGameOn === false) {
+        return;
+      }
+
+      if (!this.isHurt()) {
         this.playAnimation(this.IMAGES_STAYING);
       } else {
         this.playAnimation(this.IMAGES_HURT);
@@ -87,12 +93,12 @@ class Endboss extends MovableObject {
     }, 250);
 
     setTimeout(() => {
-      this.walkingBossWalk()
-    }, 3000)
+      this.walkingBossWalk();
+    }, 3000);
   }
 
   stopEnterAlertState() {
-    clearInterval(this.stopFirstAnimation );
+    clearInterval(this.stopFirstAnimation);
   }
 
   // ale to zakrecone
@@ -102,35 +108,65 @@ class Endboss extends MovableObject {
 
   endbossSlower() {
     this.speed = 0;
-    this.x = this.x + 20
+    this.x = this.x + 20;
     setTimeout(() => {
-      this.speed = 5;
+      this.speed = 25;
     }, 2000);
   }
 
   walkingBossWalk() {
     setInterval(() => {
+      if (isGameOn === false) {
+        return;
+      }
       this.stopStayingInterval();
-      this.playAnimation(this.IMAGES_WALKING);
       this.y = this.y;
-      this.moveLeft();
-      if(this.isHurt()) {
-        this.walkingBossHurt()
+      this.playAnimation(this.IMAGES_WALKING);
+
+      if(this.otherDirection){
+        this.moveRight();
+      } else {
+        this.moveLeft();
+      }
+
+
+      if (this.isHurt()) {
+        this.walkingBossHurt();
       } else if (this.isDead()) {
-        this.playAnimation(this.IMAGES_DEAD)
-
-        setTimeout(() => {
-          document.querySelector('.you-won').classList.remove('d-none')
-        }, 300)
-
+        this.displayYouWon();
       } else if (this.isAttacking) {
-        this.playAnimation(this.IMAGES_ATTACK)
-      } 
-    }, 250)
+        this.playAnimation(this.IMAGES_ATTACK);
+      }
+    }, 250);
   }
 
   walkingBossHurt() {
-    this.endbossSlower()
-    this.playAnimation(this.IMAGES_HURT)
-  }  
+    this.endbossSlower();
+    this.playAnimation(this.IMAGES_HURT);
+  }
+
+  soundWon = new Audio("./audio/won.mp3")
+
+  displayYouWon() {
+    this.playAnimation(this.IMAGES_DEAD);
+    if(soundOn) {
+      if (this.playOnlyOnce) {
+          this.soundWon.play();
+        }
+      }
+      setTimeout(() => {
+
+        //Czemu tak jest.
+        playAgainButtonYouWon.classList.add("play-again-show");
+        this.playOnlyOnce = false;
+      }, 500);
+
+    soundOn = false;
+    isGameOn = false;
+    youWonScreen.classList.remove("d-none");
+    buttonsTop.classList.add("buttons-top-now-show");
+    buttonsBottom.classList.add("buttons-bottom-now-show");
+    gameOverScreen.classList.add("d-none");
+    playAgainButtonYouLost.classList.add("d-none");
+  }
 }
