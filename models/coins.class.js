@@ -1,8 +1,5 @@
 class Coins extends MovableObject {
-    IMAGES_COINS = [
-        'img/8_coin/coin_1.png',
-        'img/8_coin/coin_2.png',
-    ]
+    IMAGES_COINS = ["img/8_coin/coin_1.png", "img/8_coin/coin_2.png"];
 
     offset = {
         top: 35,
@@ -12,9 +9,9 @@ class Coins extends MovableObject {
     };
 
     constructor(x, y) {
-        super()
+        super();
         this.loadImage(this.IMAGES_COINS[0]);
-        this.loadImages(this.IMAGES_COINS)
+        this.loadImages(this.IMAGES_COINS);
         this.x = x;
         this.y = y;
         this.height = 100;
@@ -23,14 +20,15 @@ class Coins extends MovableObject {
     }
 
     animate() {
-        setInterval(() => {
-
+        setInterval(
+            () => {
                 if (isGameOn === false) {
-                  return;
+                    return;
                 }
 
-            this.playAnimation(this.IMAGES_COINS)
-        }, 250 + Math.random() * 100);
+                this.playAnimation(this.IMAGES_COINS);
+            },
+            250 + Math.random() * 100,
+        );
     }
-    
 }

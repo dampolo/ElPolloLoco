@@ -4,8 +4,8 @@ class DrawableObject {
     currentImage = 0;
 
     loadImage(path) {
-        this.img = new Image() // this.img = document.getElementById('image') <img id="image" src>
-        this.img.src = path
+        this.img = new Image(); // this.img = document.getElementById('image') <img id="image" src>
+        this.img.src = path;
     }
 
     draw(ctx) {
@@ -31,13 +31,11 @@ class DrawableObject {
     //     }
     // }
 
-    loadImages(arr){
-        arr.forEach((path) => { 
+    loadImages(arr) {
+        arr.forEach((path) => {
             let img = new Image();
             img.src = path;
             this.imageCache[path] = img;
         });
     }
-
-
 }

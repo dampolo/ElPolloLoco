@@ -22,8 +22,8 @@ class SoundManager {
     }
 
     playSound(sound) {
-        if(!soundOn) {
-            return
+        if (!soundOn) {
+            return;
         } else {
             this.sounds[sound].play();
         }
@@ -34,7 +34,6 @@ class SoundManager {
     }
 
     resetSound(sound) {
-            this.sounds[sound].currentTime = 0;
+        this.sounds[sound].currentTime = 0;
     }
-
-} 
+}
