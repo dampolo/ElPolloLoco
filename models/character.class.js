@@ -80,8 +80,7 @@ class Character extends MovableObject {
     bottom: 10,
   };
 
-  characterIsDead = true;
-  characterIsDeadSound = true;
+  
 
   constructor() {
     super();
@@ -100,6 +99,8 @@ class Character extends MovableObject {
     this.speed = 10;
     this.height = 250;
     this.width = 100;
+    this.characterIsDead = true;
+    this.characterIsDeadSound = true;
     this.applyGravity();
     this.counterCoint = 0;
     this.counterBottle = 0;
@@ -154,7 +155,7 @@ class Character extends MovableObject {
       if (this.isDead()) {
         if (this.characterIsDead) {
             soundManager.playSound("pepeDead");
-          this.characterIsDead = false;
+            this.characterIsDead = false;
         }
         this.displayGameOver();
         //Nie idzie tu tego zrobic inaczej?
@@ -239,7 +240,9 @@ class Character extends MovableObject {
       this.characterIsSleeping = false;
       this.sleepAgain();
      } else if (this.world.keyboard.D) {
-      this.playAnimation(this.IMAGES_THROWING);
+      if(this.counterBottle != 0) {
+        this.playAnimation(this.IMAGES_THROWING);
+      }
       this.characterIsSleeping = false;
       this.sleepAgain();
      }else {
