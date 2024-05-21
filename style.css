@@ -405,6 +405,9 @@ h4 {
     .info-button {
         display: flex;
     }
+    .title {
+        display: none;
+    }
     .description {
         display: none;
     }

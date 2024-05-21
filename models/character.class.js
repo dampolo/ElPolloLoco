@@ -101,12 +101,11 @@ class Character extends MovableObject {
         this.characterIsDeadSound = true;
         this.applyGravity();
         this.counterCoint = 0;
-        this.counterBottle = 0;
+        this.counterBottle = 5;
         this.maxCounterBottle = 5;
         this.energy = 100;
         this.characterIsSleeping = true;
         this.sleepTimeout = null;
-        this.playOnlyOnce = true;
     }
 
     animate() {
@@ -148,7 +147,6 @@ class Character extends MovableObject {
         }, 1000 / 60);
 
         setInterval(() => {
-            soundManager.pauseSound("lost");
             if (isGameOn === false) {
                 return;
             }
@@ -158,13 +156,9 @@ class Character extends MovableObject {
                     this.characterIsDead = false;
                 }
                 this.displayGameOver();
-                //Nie idzie tu tego zrobic inaczej?
-                if (this.characterIsDeadSound) {
-                    soundManager.playSound("lost");
-                }
+                soundManager.playSound("lost");
 
                 setTimeout(() => {
-                    this.characterIsDeadSound = false;
                     playAgainButtonYouLost.classList.add("play-again-show");
                 }, 800);
                 return;
@@ -212,21 +206,10 @@ class Character extends MovableObject {
     soundLost = new Audio("./audio/lost.mp3");
 
     displayGameOver() {
-        if (soundOn) {
-            if (this.playOnlyOnce) {
-                this.soundLost.play();
-                setTimeout(() => {
-                    this.playOnlyOnce = false;
-                }, 1000);
-            }
-        }
+        this.displayGameOverSoundOff();
+        this.displayGameOverScreen();
         soundOn = false;
         isGameOn = false;
-        gameOverScreen.classList.remove("d-none");
-        buttonsTop.classList.add("buttons-top-now-show");
-        buttonsBottom.classList.add("buttons-bottom-now-show");
-        youWonScreen.classList.add("d-none");
-        playAgainButtonYouWon.classList.add("d-none");
     }
 
     characterIsSleepingWalkingStaying() {
@@ -242,12 +225,16 @@ class Character extends MovableObject {
             this.characterIsSleeping = false;
             this.sleepAgain();
         } else {
-            if (this.characterIsSleeping) {
-                this.playAnimation(this.IMAGES_LONG_IDLE);
-                soundManager.playSound("sleep");
-            } else {
-                this.playAnimation(this.IMAGES_IDLE);
-            }
+            this.characterIsSleepingStaying();
+        }
+    }
+
+    characterIsSleepingStaying() {
+        if (this.characterIsSleeping) {
+            this.playAnimation(this.IMAGES_LONG_IDLE);
+            soundManager.playSound("sleep");
+        } else {
+            this.playAnimation(this.IMAGES_IDLE);
         }
     }
 
@@ -276,5 +263,19 @@ class Character extends MovableObject {
             clearTimeout(this.sleepTimeout);
             this.characterIsSleeping = false;
         }
+    }
+
+    displayGameOverSoundOff() {
+        if (soundOn) {
+            this.soundLost.play();
+        }
+    }
+
+    displayGameOverScreen() {
+        gameOverScreen.classList.remove("d-none");
+        buttonsTop.classList.add("buttons-top-now-show");
+        buttonsBottom.classList.add("buttons-bottom-now-show");
+        youWonScreen.classList.add("d-none");
+        playAgainButtonYouWon.classList.add("d-none");
     }
 }

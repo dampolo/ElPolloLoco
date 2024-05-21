@@ -69,6 +69,7 @@ function clearAllIntervals() {
 const reset = () => {
     soundManager.resetSound("mainSound");
     soundManager.pauseSound("mainSound");
+    soundManager.pauseSound("sleep");
     startScreen.classList.remove("d-none");
     resetGame.classList.add("d-none");
     startGame.classList.remove("d-none");
@@ -132,6 +133,7 @@ const toggleBreak = () => {
     breakButton.classList.toggle("d-none");
     startButtonBreak.classList.toggle("d-none");
     isGameOn = !isGameOn; // Toggle the game state
+    soundOn = !soundOn;
 };
 
 breakButton.addEventListener("click", toggleBreak);

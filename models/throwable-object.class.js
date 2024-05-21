@@ -54,34 +54,49 @@ class ThrowableObject extends MovableObject {
             }
             if (!direction) {
                 //kierunek butelek w prawo
-                if (!this.isDead()) {
-                    this.x += 25;
-                }
+                this.flayingBottleToTheRight();
             } else {
                 //kierunek butelek w lewo
-                if (!this.isDead()) {
-                    this.x -= 25;
-                }
+                this.flayingBottleToTheLeft();
             }
         }, 50); //co 50 milisekund
+    }
+
+    flayingBottleToTheRight() {
+        if (!this.isDead()) {
+            this.x += 25;
+        }
+    }
+
+    flayingBottleToTheLeft() {
+        if (!this.isDead()) {
+            this.x -= 25;
+        }
     }
 
     animate() {
         setInterval(() => {
             if (this.isDead()) {
-                this.playAnimation(this.IMAGES_BOTTLE_SPLASH);
-                if (this.bottleIsSplashingOnce) {
-                    soundManager.playSound("bottleCrash");
-                }
-                //Czemu to dziala???????
-                this.bottleIsSplashingOnce = false;
+                this.splashingBottle();
             } else {
-                this.playAnimation(this.IMAGES_BOTTLE);
-                if (this.bottleIsFlyingOnce) {
-                    soundManager.playSound("flyingBottle");
-                }
-                this.bottleIsFlyingOnce = false;
+                this.flayingBottle();
             }
         }, 50);
+    }
+
+    splashingBottle() {
+        this.playAnimation(this.IMAGES_BOTTLE_SPLASH);
+        if (this.bottleIsSplashingOnce) {
+            soundManager.playSound("bottleCrash");
+        }
+        this.bottleIsSplashingOnce = false;
+    }
+
+    flayingBottle() {
+        this.playAnimation(this.IMAGES_BOTTLE);
+        if (this.bottleIsFlyingOnce) {
+            soundManager.playSound("flyingBottle");
+        }
+        this.bottleIsFlyingOnce = false;
     }
 }

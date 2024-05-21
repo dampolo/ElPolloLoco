@@ -20,15 +20,15 @@ class Coins extends MovableObject {
     }
 
     animate() {
-        setInterval(
-            () => {
-                if (isGameOn === false) {
-                    return;
-                }
+        setInterval(() => {
+            if (isGameOn === false) {
+                return;
+            }
+            this.playAnimation(this.IMAGES_COINS);
+        }, this.randomlyPulsating());
+    }
 
-                this.playAnimation(this.IMAGES_COINS);
-            },
-            250 + Math.random() * 100,
-        );
+    randomlyPulsating() {
+        return 250 + Math.random() * 100;
     }
 }
