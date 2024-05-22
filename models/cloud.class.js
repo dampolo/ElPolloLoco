@@ -16,6 +16,7 @@ class Cloud extends MovableObject {
             if (isGameOn === false) {
                 return;
             }
+            
             this.moveLeft();
         }, 1000 / 60);
 
@@ -23,6 +24,7 @@ class Cloud extends MovableObject {
             if (isGameOn === false) {
                 return;
             }
+
             this.playAnimation(this.CLOUD_IMAGES);
         }, 250);
     }

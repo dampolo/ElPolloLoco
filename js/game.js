@@ -13,6 +13,8 @@ const resetGame = document.querySelector(".reset-button");
 const breakButton = document.querySelector(".break-button");
 const startButtonBreak = document.querySelector(".start-button-break");
 const infoButtonBottom = document.querySelector(".info-button-bottom");
+const infoButtonTop = document.querySelector(".info-button-top");
+
 const startScreen = document.querySelector(".start");
 const gameOverScreen = document.querySelector(".game-over");
 const youWonScreen = document.querySelector(".you-won");
@@ -52,6 +54,7 @@ const start = () => {
     resetGame.classList.remove("d-none");
     infoScreen.classList.add("d-none");
     fullScreen.classList.remove("d-none");
+    infoButtonTop.classList.add("d-none")
     initLevel();
     canvas = document.getElementById("canvas");
     world = new World(canvas, keyboard);
@@ -71,6 +74,7 @@ const reset = () => {
     soundManager.pauseSound("mainSound");
     soundManager.pauseSound("sleep");
     startScreen.classList.remove("d-none");
+    infoButtonTop.classList.remove("d-none")
     resetGame.classList.add("d-none");
     startGame.classList.remove("d-none");
     breakButton.classList.add("d-none");
@@ -156,10 +160,19 @@ infoButtonBottom.addEventListener("click", () => {
     }
 });
 
+infoButtonTop.addEventListener("click", () => {
+    infoScreen.classList.toggle("d-none");
+    // if (isGameOn) {
+    //     toggleBreak();
+    // }
+});
+
 closeButton.addEventListener("click", () => {
     infoScreen.classList.toggle("d-none");
-    if (isGameOn) {
-        toggleBreak();
+    if(startScreen.classList.contains("d-none")){
+        if (isGameOn) {
+            toggleBreak();
+        }
     }
 });
 

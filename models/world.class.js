@@ -80,22 +80,24 @@ class World {
                 );
 
                 if (this.throwableObjects.length === 0) {
-                    this.throwableObjects.push(bottle);
-                    this.splashedBottle++;
-                    this.character.counterBottle -= 1;
+                    this.throwableObjectsPushToArray(bottle)
                     this.updateBottleStatusBar();
                 } else {
                     this.throwableObjects.forEach((el) => {
                         if (el.energy === 0) {
-                            this.throwableObjects.push(bottle);
-                            this.splashedBottle++;
-                            this.character.counterBottle -= 1;
+                            this.throwableObjectsPushToArray(bottle)
                             this.updateBottleStatusBar();
                         }
                     });
                 }
             }
         }
+    }
+
+    throwableObjectsPushToArray(bottle) {
+        this.throwableObjects.push(bottle);
+        this.splashedBottle++;
+        this.character.counterBottle -= 1;
     }
 
     //Chicken, Chicken-baby
@@ -155,10 +157,7 @@ class World {
                     if (enemy.isColliding(bottle)) {
                         if (!bottle.isDead()) {
                             enemy.hit();
-                            setTimeout(() => {
-                                this.deleteChickenAfterCollision(enemy);
-                            }, 1000);
-
+                            this.deleteChickenAfterCollision(enemy);
                             bottle.hit();
                             setTimeout(() => {
                                 this.deleteBottleAfterCollision(bottle);
@@ -182,21 +181,15 @@ class World {
                 if (!bottle.isDead()) {
                     this.boss.hit();
                 }
-
                 this.bossStatusbars.setPercentage(this.boss.energy * 4);
-
                 bottle.hit();
-
                 //Wypierdala flaszki z planszy po rzuceniu na bossa.
                 setTimeout(() => {
                     this.deleteBottleAfterCollision(bottle);
                 }, 300);
 
                 if (this.boss.energy === 0) {
-                    setTimeout(() => {
-                        //Wypierdala bossa z planszy
-                        this.deleteEndbossAfterCollision(this.boss);
-                    }, 500);
+                    this.deleteEndbossAfterCollisionWithBottle(this.boss);
                 }
             }
         });
@@ -245,10 +238,17 @@ class World {
     endBossAction() {
         const distance = this.boss.x - this.character.x;
         const endPositionFromStart = 3000;
+        this.endBossActionStart(endPositionFromStart);
+        this.endBossActionDirection(distance);
+    }
+
+    endBossActionStart(endPositionFromStart) {
         if (this.character.x >= endPositionFromStart) {
             this.boss.characterArrived = true;
         }
+    }
 
+    endBossActionDirection(distance) {
         if (distance >= 0) {
             this.boss.otherDirection = false;
         } else {
@@ -271,13 +271,15 @@ class World {
     }
 
     deleteChickenAfterCollision(enemy) {
-        this.level.enemies = this.level.enemies.filter((el) => {
-            if (el === enemy) {
-                return false; //tu usuwa
-            } else {
-                return true;
-            }
-        });
+        setTimeout(() => {
+            this.level.enemies = this.level.enemies.filter((el) => {
+                if (el === enemy) {
+                    return false; //tu usuwa
+                } else {
+                    return true;
+                }
+            });
+        }, 1000);
     }
 
     deleteBottleAfterCollision(bottle) {
@@ -301,14 +303,16 @@ class World {
         });
     }
 
-    deleteEndbossAfterCollision(boss) {
-        this.level.enemies = this.level.enemies.filter((el) => {
-            if (el === this.boss) {
-                return false;
-            } else {
-                return true;
-            }
-        });
+    deleteEndbossAfterCollisionWithBottle(boss) {
+        setTimeout(() => {
+            this.level.enemies = this.level.enemies.filter((el) => {
+                if (el === this.boss) {
+                    return false;
+                } else {
+                    return true;
+                }
+            });
+        }, 500);
     }
 
     deleteBottleAfterAssemblage(bottle) {

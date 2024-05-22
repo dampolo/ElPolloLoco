@@ -25,10 +25,10 @@ class Coins extends MovableObject {
                 return;
             }
             this.playAnimation(this.IMAGES_COINS);
-        }, this.randomlyPulsating());
+        }, this.randomlyPulsatingCoin());
     }
 
-    randomlyPulsating() {
+    randomlyPulsatingCoin() {
         return 250 + Math.random() * 100;
     }
 }

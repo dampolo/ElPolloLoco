@@ -94,7 +94,7 @@ class Character extends MovableObject {
         this.animate();
         this.x = -50;
         this.y = 180;
-        this.speed = 10;
+        this.speed = 6;
         this.height = 250;
         this.width = 100;
         this.characterIsDead = true;

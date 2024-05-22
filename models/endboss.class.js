@@ -83,6 +83,7 @@ class Endboss extends MovableObject {
             if (isGameOn === false) {
                 return;
             }
+            
             this.endbossStayingHurting();
         }, 250);
 
@@ -132,7 +133,7 @@ class Endboss extends MovableObject {
             if (this.isHurt()) {
                 this.walkingBossHurt();
             } else if (this.isDead()) {
-                this.displayYouWon();
+                    this.displayYouWon();
             } else if (this.isAttacking) {
                 this.playAnimation(this.IMAGES_ATTACK);
             }
@@ -148,11 +149,13 @@ class Endboss extends MovableObject {
 
     displayYouWon() {
         this.playAnimation(this.IMAGES_DEAD);
-        this.displayYouWonSoundOff();
-        this.displayYouWonButton();
-        this.displayYouWonScreen();
-        soundOn = false;
-        isGameOn = false;
+        setTimeout(() => {
+            this.displayYouWonSoundOff();
+            this.displayYouWonButton();
+            this.displayYouWonScreen();
+            soundOn = false;
+            isGameOn = false;
+        }, 400)
     }
 
     displayYouWonButton() {
