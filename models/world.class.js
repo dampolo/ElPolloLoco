@@ -65,8 +65,6 @@ class World {
     }
 
     checkThrowableObject() {
-        //Tu rzucam flaszki
-
         if (this.character.isDead()) {
             return;
         }
@@ -105,21 +103,24 @@ class World {
             return;
         }
 
+        //Collision character with enemies.
         this.checkCollisionCharacterWithChicken();
 
+        //Collision bottle with chicken or ground.
         this.checkCollisionBottleWithChickenOrGround();
 
-        //Endboss
+        //Collision boss with bottle.
         this.checkCollisionBossWithBottle();
-        //zbieranie coins
+
+        //Assemble coin.
         this.checkCollisionWithCoin();
-        //zbieranie butelek
+
+        //Assemble bottle.
         this.assemblageOfTheBottles();
     }
 
     checkCollisionCharacterWithChicken() {
         this.level.enemies.forEach((enemy) => {
-            //tak to zostawic
             this.boss.isAttacking = false;
             if (this.character.isColliding(enemy)) {
                 soundManager.playSound("chickenDead");
@@ -129,7 +130,7 @@ class World {
                 ) {
                     if (enemy !== this.boss) {
                         enemy.hit();
-                        // wypierdala kurczaki z planszy i pokazuje trupa przez sekunde.
+                        // Delete chicken and show 1 second.
                         setTimeout(() => {
                             this.deleteChickenAfterCollision(enemy);
                         }, 1000);
@@ -137,7 +138,7 @@ class World {
                 } else {
                     if (!enemy.isDead()) {
                         this.boss.isAttacking = true;
-                        //uderza Peppe.
+                        //hit Peppe.
                         this.character.hit();
                     }
                     this.updateCharacterStatusBar();
@@ -182,9 +183,7 @@ class World {
                 bottle.hit();
                 //Delete bottle after collision with boss.
                 setTimeout(() => {
-                    // if(!bottle.y >= 400) {
                     this.deleteBottleAfterCollision(bottle);
-                    // }
                 }, 300);
 
                 if (this.boss.energy === 0) {
@@ -282,7 +281,7 @@ class World {
         setTimeout(() => {
             this.level.enemies = this.level.enemies.filter((el) => {
                 if (el === enemy) {
-                    return false; //tu usuwa
+                    return false; //hier delete.
                 } else {
                     return true;
                 }
@@ -369,7 +368,6 @@ class World {
         }
 
         mo.draw(this.ctx);
-        // mo.drawFrame(this.ctx);
 
         if (mo.otherDirection) {
             this.flipImageBack(mo);

@@ -118,6 +118,15 @@ button:active {
     background-color: rgb(202, 80, 44);
 }
 
+button:disabled,
+button[disabled] {
+    border: 1px solid #999999;
+    border: 2px solid black;
+    background-color: #cccccc;
+    color: #666666;
+    cursor: default;
+}
+
 .start {
     display: flex;
     position: absolute;

@@ -133,6 +133,7 @@ playAgainButtonYouWon.addEventListener("click", () => {
 const toggleBreak = () => {
     breakButton.classList.toggle("d-none");
     startButtonBreak.classList.toggle("d-none");
+    musicButtonDisable();
     isGameOn = !isGameOn; // Toggle the game state
     soundOn = !soundOn;
     if (musicOnButton.classList.contains("d-none")) {
@@ -142,6 +143,19 @@ const toggleBreak = () => {
 
 breakButton.addEventListener("click", toggleBreak);
 startButtonBreak.addEventListener("click", toggleBreak);
+
+const musicButtonDisable = () => {
+    if (
+        musicOnButton.hasAttribute("disabled") ||
+        musicOffButton.hasAttribute("disabled")
+    ) {
+        musicOnButton.removeAttribute("disabled");
+        musicOffButton.removeAttribute("disabled");
+    } else {
+        musicOnButton.setAttribute("disabled", "true");
+        musicOffButton.setAttribute("disabled", "true");
+    }
+}
 
 fullScreen.addEventListener("click", () => {
     fullScreen.classList.add("d-none");
