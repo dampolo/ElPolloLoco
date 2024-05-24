@@ -26,12 +26,11 @@ class World {
         this.draw();
         this.setWorld();
         this.boss = this.level.enemies[this.level.enemies.length - 1];
-        // this.playMainSound();
     }
 
     playMainSound() {
         if (soundOn) {
-            soundManager.playSound("mainSound");
+            soundManager.playSound("mainSound", 0.3);
         } else {
             soundManager.pauseSound("mainSound");
             soundManager.pauseSound("sleep");

@@ -21,10 +21,11 @@ class SoundManager {
         };
     }
 
-    playSound(sound) {
+    playSound(sound, volume = 1) {
         if (!soundOn) {
             return;
         } else {
+            this.sounds[sound].volume = volume;
             this.sounds[sound].play();
         }
     }

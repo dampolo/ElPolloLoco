@@ -124,13 +124,7 @@ class Character extends MovableObject {
             this.world.camera_x = -this.x + 85;
         }, 1000 / 60);
 
-        setInterval(() => {
-            if (isGameOn === false) {
-                return;
-            }
-
-            this.characterIsDeadOrHit();
-        }, 50);
+        this.characterIsDeadOrHit();
 
         setInterval(() => {
             if (this.isDead()) {
@@ -169,6 +163,23 @@ class Character extends MovableObject {
     }
 
     characterIsDeadOrHit() {
+        setInterval(() => {
+            if (isGameOn === false) {
+                return;
+            }
+            this.characterDead();
+
+            if (this.isHurt()) {
+                this.characterIsHurting();
+            } else if (this.isAboveGround()) {
+                this.characterIsJumpingAnimation();
+            } else {
+                this.characterIsSleepingWalkingStaying();
+            }
+        }, 50);
+    }
+
+    characterDead() {
         if (this.isDead()) {
             if (this.characterIsDead) {
                 soundManager.playSound("pepeDead");
@@ -181,14 +192,6 @@ class Character extends MovableObject {
                 playAgainButtonYouLost.classList.add("play-again-show");
             }, 800);
             return;
-        }
-
-        if (this.isHurt()) {
-            this.characterIsHurting();
-        } else if (this.isAboveGround()) {
-            this.characterIsJumpingAnimation();
-        } else {
-            this.characterIsSleepingWalkingStaying();
         }
     }
 
