@@ -92,6 +92,7 @@ function initLevel() {
             new BottleBottom(-1000),
             new BottleBottom(800),
             new BottleBottom(1200),
+            new BottleBottom(1400),
             new BottleBottom(1900),
             new BottleBottom(2300),
         ],

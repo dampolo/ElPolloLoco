@@ -8,8 +8,6 @@ class BottleStatusbars extends MovableObject {
         "img/7_statusbars/1_statusbar/3_statusbar_bottle/blue/100.png",
     ];
 
-    percentage = 100;
-
     constructor() {
         super();
         this.loadImages(this.IMAGES_BOTTLE_BARS);
@@ -18,6 +16,7 @@ class BottleStatusbars extends MovableObject {
         this.y = 5;
         this.height = 40;
         this.width = 160;
+        this.percentage = 100;
     }
 
     setPercentage(percentage) {
@@ -35,7 +34,7 @@ class BottleStatusbars extends MovableObject {
             return 3;
         } else if (this.percentage >= 40) {
             return 2;
-        } else if (this.percentage >= 20) {
+        } else if (this.percentage >= 10) {
             return 1;
         } else {
             return 0;

@@ -45,7 +45,7 @@ class Chicken extends MovableObject {
             if (isGameOn === false) {
                 return;
             }
-            
+
             if (!this.isDead()) {
                 this.playAnimation(this.IMAGES_WALKING);
             } else {

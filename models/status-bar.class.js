@@ -8,8 +8,6 @@ class HealthStatusbars extends MovableObject {
         "img/7_statusbars/1_statusbar/2_statusbar_health/blue/100.png",
     ];
 
-    percentage = 100;
-
     constructor() {
         super();
         this.loadImages(this.IMAGES_HEALTH_BARS);
@@ -18,6 +16,7 @@ class HealthStatusbars extends MovableObject {
         this.y = 10;
         this.height = 50;
         this.width = 120;
+        this.percentage = 100;
     }
 
     setPercentage(percentage) {

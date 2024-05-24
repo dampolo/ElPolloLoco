@@ -54,7 +54,7 @@ const start = () => {
     resetGame.classList.remove("d-none");
     infoScreen.classList.add("d-none");
     fullScreen.classList.remove("d-none");
-    infoButtonTop.classList.add("d-none")
+    infoButtonTop.classList.add("d-none");
     initLevel();
     canvas = document.getElementById("canvas");
     world = new World(canvas, keyboard);
@@ -74,7 +74,7 @@ const reset = () => {
     soundManager.pauseSound("mainSound");
     soundManager.pauseSound("sleep");
     startScreen.classList.remove("d-none");
-    infoButtonTop.classList.remove("d-none")
+    infoButtonTop.classList.remove("d-none");
     resetGame.classList.add("d-none");
     startGame.classList.remove("d-none");
     breakButton.classList.add("d-none");
@@ -100,6 +100,12 @@ playAgainButtonYouLost.addEventListener("click", () => {
     playAgainButtonYouWon.classList.remove("play-again-show");
     playAgainButtonYouWon.classList.remove("d-none");
     isGameOn = true;
+    musicButtonOnOff();
+    reset();
+    start();
+});
+
+const musicButtonOnOff = () => {
     if (musicOffButton.classList.contains("d-none")) {
         musicOffButton.classList.add("d-none");
         soundOn = true;
@@ -108,9 +114,7 @@ playAgainButtonYouLost.addEventListener("click", () => {
         musicOffButton.classList.remove("d-none");
         soundOn = false;
     }
-    reset();
-    start();
-});
+};
 
 playAgainButtonYouWon.addEventListener("click", () => {
     buttonsTop.classList.remove("d-none");
@@ -121,14 +125,7 @@ playAgainButtonYouWon.addEventListener("click", () => {
     playAgainButtonYouWon.classList.remove("play-again-show");
     playAgainButtonYouWon.classList.remove("d-none");
     isGameOn = true;
-    if (musicOffButton.classList.contains("d-none")) {
-        musicOffButton.classList.add("d-none");
-        soundOn = true;
-    } else {
-        musicOnButton.classList.add("d-none");
-        musicOffButton.classList.remove("d-none");
-        soundOn = false;
-    }
+    musicButtonOnOff();
     reset();
     start();
 });
@@ -138,6 +135,9 @@ const toggleBreak = () => {
     startButtonBreak.classList.toggle("d-none");
     isGameOn = !isGameOn; // Toggle the game state
     soundOn = !soundOn;
+    if (musicOnButton.classList.contains("d-none")) {
+        soundOn = false;
+    }
 };
 
 breakButton.addEventListener("click", toggleBreak);
@@ -162,14 +162,11 @@ infoButtonBottom.addEventListener("click", () => {
 
 infoButtonTop.addEventListener("click", () => {
     infoScreen.classList.toggle("d-none");
-    // if (isGameOn) {
-    //     toggleBreak();
-    // }
 });
 
 closeButton.addEventListener("click", () => {
     infoScreen.classList.toggle("d-none");
-    if(startScreen.classList.contains("d-none")){
+    if (startScreen.classList.contains("d-none")) {
         if (isGameOn) {
             toggleBreak();
         }

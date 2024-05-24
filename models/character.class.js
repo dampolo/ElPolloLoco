@@ -35,8 +35,6 @@ class Character extends MovableObject {
     ];
 
     IMAGES_JUMPING_UP = [
-        // 'img/2_character_pepe/3_jump/J-31.png',
-        // 'img/2_character_pepe/3_jump/J-32.png',
         "img/2_character_pepe/3_jump/J-33.png",
         "img/2_character_pepe/3_jump/J-34.png",
     ];
@@ -94,16 +92,17 @@ class Character extends MovableObject {
         this.animate();
         this.x = -50;
         this.y = 180;
-        this.speed = 6;
+        this.speed = 10;
         this.height = 250;
         this.width = 100;
         this.characterIsDead = true;
         this.characterIsDeadSound = true;
         this.applyGravity();
         this.counterCoint = 0;
-        this.counterBottle = 5;
-        this.maxCounterBottle = 5;
-        this.energy = 100;
+        this.counterBottle = 0;
+        this.maxCounterBottle = 6;
+        this.maxEnergy = 300;
+        this.energy = 300;
         this.characterIsSleeping = true;
         this.sleepTimeout = null;
     }
@@ -120,28 +119,7 @@ class Character extends MovableObject {
                 return;
             }
 
-            if (
-                this.world.keyboard.RIGHT &&
-                this.x < this.world.level.level_end_x
-            ) {
-                soundManager.pauseSound("sleep");
-                this.characterIsMovingRight();
-            }
-
-            if (this.world.keyboard.LEFT && this.x > -1500) {
-                soundManager.pauseSound("sleep");
-                this.characterIsMovingLeft();
-            }
-
-            if (this.world.keyboard.SPACE && !this.isAboveGround()) {
-                soundManager.pauseSound("sleep");
-                this.characterIsJumping();
-            }
-
-            if (this.world.keyboard.SPACE) {
-                soundManager.pauseSound("sleep");
-                this.resetAnimation();
-            }
+            this.characterIsMoving();
 
             this.world.camera_x = -this.x + 85;
         }, 1000 / 60);
@@ -150,27 +128,8 @@ class Character extends MovableObject {
             if (isGameOn === false) {
                 return;
             }
-            if (this.isDead()) {
-                if (this.characterIsDead) {
-                    soundManager.playSound("pepeDead");
-                    this.characterIsDead = false;
-                }
-                this.displayGameOver();
-                soundManager.playSound("lost");
 
-                setTimeout(() => {
-                    playAgainButtonYouLost.classList.add("play-again-show");
-                }, 800);
-                return;
-            }
-
-            if (this.isHurt()) {
-                this.characterIsHurting();
-            } else if (this.isAboveGround()) {
-                this.characterIsJumpingAnimation();
-            } else {
-                this.characterIsSleepingWalkingStaying();
-            }
+            this.characterIsDeadOrHit();
         }, 50);
 
         setInterval(() => {
@@ -182,6 +141,55 @@ class Character extends MovableObject {
                 }, 300);
             }
         }, 100);
+    }
+
+    characterIsMoving() {
+        if (
+            this.world.keyboard.RIGHT &&
+            this.x < this.world.level.level_end_x
+        ) {
+            soundManager.pauseSound("sleep");
+            this.characterIsMovingRight();
+        }
+
+        if (this.world.keyboard.LEFT && this.x > -1500) {
+            soundManager.pauseSound("sleep");
+            this.characterIsMovingLeft();
+        }
+
+        if (this.world.keyboard.SPACE && !this.isAboveGround()) {
+            soundManager.pauseSound("sleep");
+            this.characterIsJumping();
+        }
+
+        if (this.world.keyboard.SPACE) {
+            soundManager.pauseSound("sleep");
+            this.resetAnimation();
+        }
+    }
+
+    characterIsDeadOrHit() {
+        if (this.isDead()) {
+            if (this.characterIsDead) {
+                soundManager.playSound("pepeDead");
+                this.characterIsDead = false;
+            }
+            this.displayGameOver();
+            soundManager.playSound("lost");
+
+            setTimeout(() => {
+                playAgainButtonYouLost.classList.add("play-again-show");
+            }, 800);
+            return;
+        }
+
+        if (this.isHurt()) {
+            this.characterIsHurting();
+        } else if (this.isAboveGround()) {
+            this.characterIsJumpingAnimation();
+        } else {
+            this.characterIsSleepingWalkingStaying();
+        }
     }
 
     characterIsMovingRight() {
@@ -213,7 +221,6 @@ class Character extends MovableObject {
     }
 
     characterIsSleepingWalkingStaying() {
-        //Czemu to tu jest? on idze do word i sobie szuka pomimo ze to nie extends world.
         if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
             this.playAnimation(this.IMAGES_WALKING);
             this.characterIsSleeping = false;

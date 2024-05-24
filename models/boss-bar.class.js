@@ -8,8 +8,6 @@ class BossStatusbars extends MovableObject {
         "img/7_statusbars/2_statusbar_endboss/blue/blue100.png",
     ];
 
-    percentage = 100;
-
     constructor() {
         super();
         this.loadImages(this.IMAGES_HEALTH_BOSS_BARS);
@@ -18,6 +16,7 @@ class BossStatusbars extends MovableObject {
         this.y = 60;
         this.height = 40;
         this.width = 160;
+        this.percentage;
     }
 
     setPercentage(percentage) {

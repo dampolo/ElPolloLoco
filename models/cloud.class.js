@@ -16,7 +16,7 @@ class Cloud extends MovableObject {
             if (isGameOn === false) {
                 return;
             }
-            
+
             this.moveLeft();
         }, 1000 / 60);
 

@@ -61,7 +61,7 @@ class Endboss extends MovableObject {
         this.height = 300;
         this.width = 300;
         this.energy = 25;
-        this.speed = 20;
+        this.speed = 50;
         this.characterArrived = false;
         this.isAttacking = false;
         this.directionLeft = true;
@@ -77,13 +77,12 @@ class Endboss extends MovableObject {
     }
 
     enterAlertState() {
-        // bez this.stayingInterval niedziala poprawnie
         this.stopEnterAlertState();
         this.stayingInterval = setInterval(() => {
             if (isGameOn === false) {
                 return;
             }
-            
+
             this.endbossStayingHurting();
         }, 250);
 
@@ -104,7 +103,6 @@ class Endboss extends MovableObject {
         clearInterval(this.stopFirstAnimation);
     }
 
-    // ale to zakrecone
     stopStayingInterval() {
         clearInterval(this.stayingInterval);
     }
@@ -133,7 +131,7 @@ class Endboss extends MovableObject {
             if (this.isHurt()) {
                 this.walkingBossHurt();
             } else if (this.isDead()) {
-                    this.displayYouWon();
+                this.displayYouWon();
             } else if (this.isAttacking) {
                 this.playAnimation(this.IMAGES_ATTACK);
             }
@@ -155,7 +153,7 @@ class Endboss extends MovableObject {
             this.displayYouWonScreen();
             soundOn = false;
             isGameOn = false;
-        }, 400)
+        }, 400);
     }
 
     displayYouWonButton() {

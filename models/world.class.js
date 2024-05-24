@@ -31,9 +31,9 @@ class World {
 
     playMainSound() {
         if (soundOn) {
-            // soundManager.playSound("mainSound");
+            soundManager.playSound("mainSound");
         } else {
-            // soundManager.pauseSound("mainSound");
+            soundManager.pauseSound("mainSound");
             soundManager.pauseSound("sleep");
         }
     }
@@ -80,12 +80,12 @@ class World {
                 );
 
                 if (this.throwableObjects.length === 0) {
-                    this.throwableObjectsPushToArray(bottle)
+                    this.throwableObjectsPushToArray(bottle);
                     this.updateBottleStatusBar();
                 } else {
                     this.throwableObjects.forEach((el) => {
                         if (el.energy === 0) {
-                            this.throwableObjectsPushToArray(bottle)
+                            this.throwableObjectsPushToArray(bottle);
                             this.updateBottleStatusBar();
                         }
                     });
@@ -141,9 +141,7 @@ class World {
                         //uderza Peppe.
                         this.character.hit();
                     }
-                    this.healthStatusBarsBlue.setPercentage(
-                        this.character.energy,
-                    );
+                    this.updateCharacterStatusBar();
                 }
             }
         });
@@ -183,9 +181,11 @@ class World {
                 }
                 this.bossStatusbars.setPercentage(this.boss.energy * 4);
                 bottle.hit();
-                //Wypierdala flaszki z planszy po rzuceniu na bossa.
+                //Delete bottle after collision with boss.
                 setTimeout(() => {
+                    // if(!bottle.y >= 400) {
                     this.deleteBottleAfterCollision(bottle);
+                    // }
                 }, 300);
 
                 if (this.boss.energy === 0) {
@@ -200,13 +200,13 @@ class World {
             if (this.character !== 0) {
                 if (this.character.isColliding(bottle)) {
                     soundManager.playSound("takeBottle");
-                    // Wypierdala flaszki z planszy po zebraniu
+                    // Delete bottle after assemblage.
                     if (
                         this.character.counterBottle <
                         this.character.maxCounterBottle
                     ) {
                         this.deleteBottleAfterAssemblage(bottle);
-                        //Zwiekszamy ilosc zebranych butelek
+                        //Increase bottle counter.
                         this.character.counterBottle += 1;
                         this.updateBottleStatusBar();
                     }
@@ -221,15 +221,9 @@ class World {
                 if (this.character.isColliding(coin)) {
                     soundManager.playSound("coin");
                     this.deleteCoinAfterCollision(coin);
-                    //zwiekszamy lisc zebranych montet
+                    //Increase coint counter.
                     this.character.counterCoint += 1;
-                    let allCoins =
-                        (this.character.counterCoint * 100) /
-                        this.level.coins.length;
-                    if (this.level.coins.length === 0) {
-                        allCoins = 100;
-                    }
-                    this.coinStatusbars.setPercentage(allCoins);
+                    this.updateCoinStatusBar();
                 }
             }
         });
@@ -263,6 +257,21 @@ class World {
         this.bottleStatusbars.setPercentage(allBottle);
     }
 
+    updateCoinStatusBar() {
+        let allCoins =
+            (this.character.counterCoint * 100) / this.level.coins.length;
+        if (this.level.coins.length === 0) {
+            allCoins = 100;
+        }
+        this.coinStatusbars.setPercentage(allCoins);
+    }
+
+    updateCharacterStatusBar() {
+        this.healthStatusBarsBlue.setPercentage(
+            (this.character.energy * 100) / this.character.maxEnergy,
+        );
+    }
+
     showSplashedBottleOnTheGorund(bottle) {
         if (bottle.y > 400) {
             bottle.hit();
@@ -283,7 +292,7 @@ class World {
     }
 
     deleteBottleAfterCollision(bottle) {
-        // Wypierdala flaszki z planszy po rzuceniu na kury.
+        //Delete bottle after collision with chicken.
         this.throwableObjects = this.throwableObjects.filter((el) => {
             if (el === bottle) {
                 return false;
@@ -324,8 +333,6 @@ class World {
             }
         });
     }
-
-    //  filter zwraca nowy array.
 
     draw() {
         //all delate
