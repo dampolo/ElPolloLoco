@@ -11,6 +11,7 @@ class Cloud extends MovableObject {
         this.speed = 0.1 + Math.random() * 0.1;
         this.animate();
     }
+
     animate() {
         setInterval(() => {
             if (isGameOn === false) {
