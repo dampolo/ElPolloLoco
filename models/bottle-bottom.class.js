@@ -4,6 +4,13 @@ class BottleBottom extends MovableObject {
         "img/6_salsa_bottle/2_salsa_bottle_on_ground.png",
     ];
 
+    offset = {
+        top: 5,
+        left: 20,
+        right: 10,
+        bottom: 5,
+    };
+
     constructor(x) {
         super();
         const randomIndex = this.displayRandomBottle();
