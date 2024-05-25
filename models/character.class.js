@@ -107,6 +107,14 @@ class Character extends MovableObject {
         this.sleepTimeout = null;
     }
 
+    /**
+     * Animates the character and updates game state periodically.
+     * - Pauses the walking sound.
+     * - Checks if the game is on, character is dead, or if the character is moving.
+     * - Updates the camera position based on the character's movement.
+     * - Checks and handles character death animation if the character is dead.
+     */
+
     animate() {
         setInterval(() => {
             soundManager.pauseSound("walk");
@@ -121,6 +129,7 @@ class Character extends MovableObject {
 
             this.characterIsMoving();
 
+            // Update camera position based on character movement
             this.world.camera_x = -this.x + 85;
         }, 1000 / 60);
 
@@ -137,7 +146,15 @@ class Character extends MovableObject {
         }, 100);
     }
 
+    /**
+     * Handles character movement based on keyboard input.
+     * - If the right arrow key is pressed and the character is within level bounds, initiate moving right.
+     * - If the left arrow key is pressed and the character is within level bounds, initiate moving left.
+     * - If the spacebar is pressed and the character is on the ground, initiate jumping.
+     * - If the spacebar is pressed, reset character animation.
+     */
     characterIsMoving() {
+        // If the right arrow key is pressed and character is within level bounds, move right
         if (
             this.world.keyboard.RIGHT &&
             this.x < this.world.level.level_end_x
@@ -146,22 +163,33 @@ class Character extends MovableObject {
             this.characterIsMovingRight();
         }
 
+        // If the left arrow key is pressed and character is within level bounds, move left
         if (this.world.keyboard.LEFT && this.x > -1500) {
             soundManager.pauseSound("sleep");
             this.characterIsMovingLeft();
         }
 
+        // If the spacebar is pressed and character is on the ground, initiate jumping
         if (this.world.keyboard.SPACE && !this.isAboveGround()) {
             soundManager.pauseSound("sleep");
             this.characterIsJumping();
         }
 
+        // If the spacebar is pressed, reset character animation
         if (this.world.keyboard.SPACE) {
             soundManager.pauseSound("sleep");
             this.resetAnimation();
         }
     }
 
+    /**
+     * Checks and updates the character's state periodically.
+     * Checks if the game is on and updates the character's state accordingly:
+     * - Checks if the character is dead and handles game over.
+     * - Checks if the character is hurt and initiates the hurting animation.
+     * - Checks if the character is jumping or falling and initiates the corresponding animation.
+     * - Otherwise, handles sleeping, walking, or staying idle animation.
+     */
     characterIsDeadOrHit() {
         setInterval(() => {
             if (isGameOn === false) {
@@ -179,6 +207,15 @@ class Character extends MovableObject {
         }, 50);
     }
 
+    /**
+     * Checks if the character is dead and handles game over accordingly.
+     * If the character is dead and the death animation hasn't played yet:
+     * - Plays the death sound.
+     * - Displays the game over screen.
+     * - Plays the lost sound.
+     * - Shows the play again button for losing after a delay.
+     * @returns {void}
+     */
     characterDead() {
         if (this.isDead()) {
             if (this.characterIsDead) {
@@ -195,22 +232,38 @@ class Character extends MovableObject {
         }
     }
 
+    /**
+     * Initiates the character moving right action and plays the walking sound.
+     * Performs the right movement, sets the 'otherDirection' flag to false, and plays the walk sound.
+     */
     characterIsMovingRight() {
+        // Move the character right
         this.moveRight();
         this.otherDirection = false;
         soundManager.playSound("walk");
     }
 
+    /**
+     * Initiates the character moving left action and plays the walking sound.
+     * Performs the left movement, sets the 'otherDirection' flag to true, and plays the walk sound.
+     */
     characterIsMovingLeft() {
         this.moveLeft();
         this.otherDirection = true;
         soundManager.playSound("walk");
     }
 
+    /**
+     * Initiates the character jumping action and plays the jumping sound.
+     * Resets sleeping state and sleep timeout, performs the jump animation, and plays the jump sound.
+     */
     characterIsJumping() {
+        // Reset sleeping state and sleep timeout
         this.characterIsSleeping = false;
         this.sleepAgain();
+        // Perform the jump action
         this.jump();
+        // Play the jump sound
         soundManager.playSound("jump");
     }
 
