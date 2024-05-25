@@ -67,6 +67,11 @@ class Endboss extends MovableObject {
         this.animate();
     }
 
+    /**
+     * Initiates the animation sequence.
+     * Sets an interval to check if the character has arrived.
+     * If the character has arrived, initiates the alert state of the end boss.
+     */
     animate() {
         this.stopFirstAnimation = setInterval(() => {
             if (this.characterArrived) {
@@ -75,6 +80,12 @@ class Endboss extends MovableObject {
         }, 250);
     }
 
+    /**
+     * Initiates the alert state of the end boss.
+     * Stops any existing interval for entering the alert state.
+     * Sets an interval for staying animation, checking if the game is on.
+     * Initiates the walking behavior of the boss after a delay.
+     */
     enterAlertState() {
         this.stopEnterAlertState();
         this.stayingInterval = setInterval(() => {
@@ -89,6 +100,11 @@ class Endboss extends MovableObject {
         }, 3000);
     }
 
+    /**
+     * Handles the staying animation of the end boss, considering whether it's hurting.
+     * Plays the staying animation if the boss is not hurting.
+     * Plays the hurt animation if the boss is hurting.
+     */
     endbossStayingHurting() {
         if (!this.isHurt()) {
             this.playAnimation(this.IMAGES_STAYING);
@@ -97,14 +113,26 @@ class Endboss extends MovableObject {
         }
     }
 
+    /**
+     * Stops the interval used for entering the alert state of the end boss.
+     */
     stopEnterAlertState() {
         clearInterval(this.stopFirstAnimation);
     }
 
+    /**
+     * Stops the interval used for staying idle animation of the end boss.
+     */
     stopStayingInterval() {
         clearInterval(this.stayingInterval);
     }
 
+    /**
+     * Temporarily increases the speed of the end boss.
+     * - Stops the boss's current movement.
+     * - Moves the boss to the right by 20 units.
+     * - Restores the boss's speed after a delay of 2000 milliseconds (2 seconds).
+     */
     endbossFaster() {
         this.speed = 0;
         this.x = this.x + 20;
@@ -113,6 +141,11 @@ class Endboss extends MovableObject {
         }, 2000);
     }
 
+    /**
+     * Initiates the walking behavior of the end boss.
+     * The boss alternates between moving left and right while playing the walking animation.
+     * Stops animation if the game is off.
+     */
     endbossWalking() {
         setInterval(() => {
             if (isGameOn === false) {
@@ -131,6 +164,12 @@ class Endboss extends MovableObject {
         }, 250);
     }
 
+    /**
+     * Handles the behavior of the walking boss.
+     * If the boss is hurt, initiates the hurt animation.
+     * If the boss is dead, initiates the "You Won" sequence.
+     * If the boss is attacking, plays the attack animation.
+     */
     walkingBoss() {
         if (this.isHurt()) {
             this.walkingBossHurt();
@@ -141,6 +180,9 @@ class Endboss extends MovableObject {
         }
     }
 
+    /**
+     * Initiates the hurt animation for the walking boss and increases its speed.
+     */
     walkingBossHurt() {
         this.endbossFaster();
         this.playAnimation(this.IMAGES_HURT);
@@ -148,29 +190,44 @@ class Endboss extends MovableObject {
 
     soundWon = new Audio("./audio/won.mp3");
 
+    /**
+     * Initiates the "You Won" sequence.
+     * Plays the dead animation of the character and then displays the "You Won" screen, sound, and button.
+     * Updates game and sound states accordingly.
+     */
     displayYouWon() {
         this.playAnimation(this.IMAGES_DEAD);
         setTimeout(() => {
             this.displayYouWonSoundOff();
             this.displayYouWonButton();
             this.displayYouWonScreen();
+            // Turn off sound and set game state to off
             soundOn = false;
             isGameOn = false;
         }, 400);
     }
 
+    /**
+     * Displays the play again button for winning after a delay.
+     */
     displayYouWonButton() {
         setTimeout(() => {
             playAgainButtonYouWon.classList.add("play-again-show");
         }, 500);
     }
 
+    /**
+     * Displays the "You Won" sound if sound is on.
+     */
     displayYouWonSoundOff() {
         if (soundOn) {
             this.soundWon.play();
         }
     }
 
+    /**
+     * Displays the "You Won" screen and hides elements related to losing.
+     */
     displayYouWonScreen() {
         youWonScreen.classList.remove("d-none");
         buttonsTop.classList.add("buttons-top-now-show");
