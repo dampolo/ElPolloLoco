@@ -14,6 +14,10 @@ class BottleBottom extends MovableObject {
         this.width = 50;
     }
 
+    /**
+     * Displays a random bottle image by selecting a random index from the IMAGES_BOTTLE array.
+     * @returns {number} The random index selected.
+     */
     displayRandomBottle() {
         const randomIndex = Math.floor(
             Math.random() * this.IMAGES_BOTTLE.length,
