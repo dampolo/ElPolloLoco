@@ -144,6 +144,19 @@ const toggleBreak = () => {
     }
 };
 
+breakInfo.addEventListener("click", () => {
+    breakInfo.classList.remove("play-again-show");
+    breakButton.classList.remove("d-none");
+    startButtonBreak.classList.add("d-none");
+    musicButtonDisable();
+    isGameOn = true;
+    if (musicOnButton.classList.contains("d-none")) {
+        soundOn = false;
+    } else {
+        soundOn = true;
+    }
+});
+
 breakButton.addEventListener("click", toggleBreak);
 startButtonBreak.addEventListener("click", toggleBreak);
 
