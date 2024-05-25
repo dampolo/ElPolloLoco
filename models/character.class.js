@@ -99,7 +99,7 @@ class Character extends MovableObject {
         this.characterIsDeadSound = true;
         this.applyGravity();
         this.counterCoint = 0;
-        this.counterBottle = 0;
+        this.counterBottle = 6;
         this.maxCounterBottle = 6;
         this.maxEnergy = 300;
         this.energy = 300;

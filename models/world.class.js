@@ -28,6 +28,10 @@ class World {
         this.boss = this.level.enemies[this.level.enemies.length - 1];
     }
 
+    /**
+     * Plays the main sound with a specified volume if sound is on.
+     * If sound is off, pauses both the main sound and the sleep sound.
+     */
     playMainSound() {
         if (soundOn) {
             soundManager.playSound("mainSound", 0.3);
@@ -119,6 +123,12 @@ class World {
         this.assemblageOfTheBottles();
     }
 
+    /**
+     * Check for collisions between the character and enemies (including the boss),
+     * and handle the resulting interactions, including hitting enemies, playing sounds,
+     * and updating the character's status.
+     */
+
     checkCollisionCharacterWithChicken() {
         this.level.enemies.forEach((enemy) => {
             this.boss.isAttacking = false;
@@ -147,6 +157,10 @@ class World {
         });
     }
 
+    /**
+     * Check for collisions between throwable bottles and enemies (excluding the boss),
+     * and handle the resulting interactions, including hitting enemies and deleting bottles.
+     */
     checkCollisionBottleWithChickenOrGround() {
         this.throwableObjects.forEach((bottle) => {
             this.showSplashedBottleOnTheGorund(bottle);
@@ -162,17 +176,16 @@ class World {
                             }, 200);
                         }
                     }
-
-                    if (!bottle.y >= 400) {
-                        setTimeout(() => {
-                            this.deleteBottleAfterCollision(bottle);
-                        }, 1000);
-                    }
                 }
             });
         });
     }
 
+    /**
+     * Checks for collision between the boss and throwable objects (bottles).
+     * Reduces the boss's energy if a collision is detected and updates the boss status bar.
+     * Deletes the bottle after collision with the boss and removes the boss if its energy reaches 0.
+     */
     checkCollisionBossWithBottle() {
         this.throwableObjects.forEach((bottle) => {
             if (this.boss.isColliding(bottle)) {
@@ -193,6 +206,10 @@ class World {
         });
     }
 
+    /**
+     * Checks for collision between the character and bottles in the level for assemblage.
+     * Plays a sound effect and updates the bottle status bar if a collision is detected.
+     */
     assemblageOfTheBottles() {
         this.level.bottleBottom.forEach((bottle) => {
             if (this.character !== 0) {
@@ -213,6 +230,10 @@ class World {
         });
     }
 
+    /**
+     * Checks for collision between the character and coins in the level.
+     * Plays a sound effect and updates the coin status bar if a collision is detected.
+     */
     checkCollisionWithCoin() {
         this.level.coins.forEach((coin) => {
             if (this.character !== 0) {
@@ -227,6 +248,12 @@ class World {
         });
     }
 
+    /**
+     * Initiates the end boss action.
+     * Calculates the distance between the end boss and the character.
+     * Determines the end boss action start based on the character's position.
+     * Determines the end boss action direction based on the distance between the end boss and the character.
+     */
     endBossAction() {
         const distance = this.boss.x - this.character.x;
         const endPositionFromStart = 3000;
@@ -234,12 +261,23 @@ class World {
         this.endBossActionDirection(distance);
     }
 
+    /**
+     * Initiates end boss action when the character reaches a specified position from the start.
+     * Sets a flag indicating that the character has arrived at the specified position.
+     * @param {*} endPositionFromStart - The position from the start where the character triggers the end boss action.
+     */
     endBossActionStart(endPositionFromStart) {
         if (this.character.x >= endPositionFromStart) {
             this.boss.characterArrived = true;
         }
     }
 
+    /**
+     * Determines the direction of end boss action based on the distance from the character.
+     * If the distance is greater than or equal to 0, sets the end boss direction to move towards the character.
+     * If the distance is less than 0, sets the end boss direction to move away from the character.
+     * @param {*} distance - The distance from the character to the end boss.
+     */
     endBossActionDirection(distance) {
         if (distance >= 0) {
             this.boss.otherDirection = false;
@@ -248,6 +286,11 @@ class World {
         }
     }
 
+    /**
+     * Updates the bottle status bar based on the character's collected bottles.
+     * Calculates the percentage of collected bottles relative to the character's maximum bottle capacity.
+     * Updates the bottle status bar accordingly.
+     */
     updateBottleStatusBar() {
         let allBottle =
             (this.character.counterBottle * 100) /
@@ -255,6 +298,12 @@ class World {
         this.bottleStatusbars.setPercentage(allBottle);
     }
 
+    /**
+     * Updates the coin status bar based on the character's collected coins.
+     * Calculates the percentage of collected coins relative to the total number of coins in the level.
+     * If there are no coins remaining in the level, sets the percentage to 100.
+     * Updates the coin status bar accordingly.
+     */
     updateCoinStatusBar() {
         let allCoins =
             (this.character.counterCoint * 100) / this.level.coins.length;
@@ -264,12 +313,21 @@ class World {
         this.coinStatusbars.setPercentage(allCoins);
     }
 
+    /**
+     * Updates the character's status bar based on its energy level.
+     * Calculates the percentage of energy remaining relative to the character's maximum energy.
+     * Updates the health status bar accordingly.
+     */
     updateCharacterStatusBar() {
         this.healthStatusBarsBlue.setPercentage(
             (this.character.energy * 100) / this.character.maxEnergy,
         );
     }
 
+    /**
+     * Displays a splashed bottle on the ground if it falls below a certain y-coordinate.
+     * @param {*} bottle - The bottle to be displayed.
+     */
     showSplashedBottleOnTheGorund(bottle) {
         if (bottle.y > 400) {
             bottle.hit();
@@ -277,6 +335,11 @@ class World {
         }
     }
 
+    /**
+     * Deletes a chicken enemy from the list of enemies after collision with the character.
+     * Show the dead chicken 1000 milliseconds.
+     * @param {*} enemy - The chicken enemy to be deleted.
+     */
     deleteChickenAfterCollision(enemy) {
         setTimeout(() => {
             this.level.enemies = this.level.enemies.filter((el) => {
@@ -289,6 +352,10 @@ class World {
         }, 1000);
     }
 
+    /**
+     * Deletes a bottle from the list of throwable objects after collision with the character.
+     * @param {*} bottle - The bottle to be deleted.
+     */
     deleteBottleAfterCollision(bottle) {
         //Delete bottle after collision with chicken.
         this.throwableObjects = this.throwableObjects.filter((el) => {
@@ -300,6 +367,10 @@ class World {
         });
     }
 
+    /**
+     * Deletes a coin from the list of coins after collision with the character.
+     * @param {*} coin - The coin to be deleted.
+     */
     deleteCoinAfterCollision(coin) {
         this.level.coins = this.level.coins.filter((el) => {
             if (el === coin) {
@@ -310,6 +381,10 @@ class World {
         });
     }
 
+    /**
+     * Deletes the end boss from the list of enemies after collision with a bottle.
+     * @param {*} boss - The end boss to be deleted.
+     */
     deleteEndbossAfterCollisionWithBottle(boss) {
         setTimeout(() => {
             this.level.enemies = this.level.enemies.filter((el) => {
@@ -322,6 +397,10 @@ class World {
         }, 500);
     }
 
+    /**
+     * Deletes a bottle from the list of bottles after it's been collected.
+     * @param {*} bottle - The bottle to be deleted.
+     */
     deleteBottleAfterAssemblage(bottle) {
         this.level.bottleBottom = this.level.bottleBottom.filter((el) => {
             if (el === bottle) {
