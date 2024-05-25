@@ -216,6 +216,10 @@ class Character extends MovableObject {
 
     soundLost = new Audio("./audio/lost.mp3");
 
+    /**
+     * Displays the game over screen and sound, and updates game state.
+     * Stops all sounds if sound is on, displays the game over screen, turns off sound, and sets game state to off.
+     */
     displayGameOver() {
         this.displayGameOverSoundOff();
         this.displayGameOverScreen();
@@ -223,68 +227,118 @@ class Character extends MovableObject {
         isGameOn = false;
     }
 
+    /**
+     * Initiates the character animation based on its actions when it's sleeping, walking, or staying idle.
+     * If the character is moving left or right, plays the walking animation and resets the sleep timeout.
+     * If the character is throwing a bottle (using the 'D' key) and has bottles available, plays the throwing animation and resets the sleep timeout.
+     * Otherwise, initiates the sleeping or staying idle animation.
+     */
     characterIsSleepingWalkingStaying() {
         if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
+            // If character is moving left or right, play walking animation and reset sleep timeout
             this.playAnimation(this.IMAGES_WALKING);
             this.characterIsSleeping = false;
             this.sleepAgain();
         } else if (this.world.keyboard.D) {
+            // If character is throwing a bottle, play throwing animation and reset sleep timeout if bottles are available
             if (this.counterBottle != 0) {
                 this.playAnimation(this.IMAGES_THROWING);
             }
             this.characterIsSleeping = false;
             this.sleepAgain();
         } else {
+            // If character is not moving or throwing, initiate sleeping or staying idle animation
             this.characterIsSleepingStaying();
         }
     }
 
+    /**
+     * Initiates the character sleeping or staying idle animation and plays the corresponding sound.
+     * If the character is sleeping, plays the long idle animation and the "sleep" sound.
+     * If the character is not sleeping, plays the regular idle animation.
+     */
     characterIsSleepingStaying() {
+        // Check if the character is sleeping
         if (this.characterIsSleeping) {
+            // Play the long idle animation and the "sleep" sound
             this.playAnimation(this.IMAGES_LONG_IDLE);
             soundManager.playSound("sleep");
         } else {
+            // Play the regular idle animation
             this.playAnimation(this.IMAGES_IDLE);
         }
     }
 
+    /**
+     * Initiates the character hurting animation and plays the corresponding sound.
+     */
     characterIsHurting() {
+        // Play the hurting animation
         this.playAnimation(this.IMAGES_HURT);
+        // Play the "pepeHit" sound
         soundManager.playSound("pepeHit");
     }
 
+    /**
+     * Initiates the character jumping animation based on the vertical speed.
+     * Plays the appropriate animation sequence for jumping up or down.
+     */
     characterIsJumpingAnimation() {
+        // Check if the character is moving upwards
         if (this.speedY < 0) {
+            // Play the jumping down animation
             this.playAnimation(this.IMAGES_JUMPING_DOWN, false);
         } else {
+            // Play the jumping up animation
             this.playAnimation(this.IMAGES_JUMPING_UP, false);
         }
     }
 
+    /**
+     * Initiates the sleep timeout again.
+     * Cancels any existing sleep timeout before setting a new one.
+     */
     sleepAgain() {
+        // Cancel any existing sleep timeout
         this.cancelSleep();
+        // Set a new sleep timeout to trigger character sleeping after 5 seconds
         this.sleepTimeout = setTimeout(() => {
             this.characterIsSleeping = true;
         }, 5000);
     }
 
+    /**
+     * Cancels the sleep timeout if it's set.
+     * Resets the character's sleeping state.
+     */
     cancelSleep() {
+        // If a sleep timeout is set, clear it and reset the character's sleeping state
         if (this.sleepTimeout !== null) {
             clearTimeout(this.sleepTimeout);
             this.characterIsSleeping = false;
         }
     }
 
+    /**
+     * Displays the game over sound if sound is on.
+     */
     displayGameOverSoundOff() {
+        // If sound is on, play the game over sound
         if (soundOn) {
             this.soundLost.play();
         }
     }
 
+    /**
+     * Displays the game over screen and hides elements related to winning.
+     */
     displayGameOverScreen() {
+        // Show the game over screen
         gameOverScreen.classList.remove("d-none");
+        // Show the buttons and indicate they are now visible
         buttonsTop.classList.add("buttons-top-now-show");
         buttonsBottom.classList.add("buttons-bottom-now-show");
+        // Hide the you won screen and play again button for winning
         youWonScreen.classList.add("d-none");
         playAgainButtonYouWon.classList.add("d-none");
     }
