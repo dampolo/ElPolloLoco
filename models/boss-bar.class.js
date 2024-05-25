@@ -19,12 +19,22 @@ class BossStatusbars extends MovableObject {
         this.percentage;
     }
 
+    /**
+     * Sets the health percentage of the boss and updates its image accordingly.
+     * @param {number} percentage - The health percentage of the boss.
+     */
     setPercentage(percentage) {
         this.percentage = percentage;
+        // Determine the path of the boss image based on the health percentage
         let path = this.IMAGES_HEALTH_BOSS_BARS[this.resolveImageIndex()];
+        // Update the boss image using the image cache
         this.img = this.imageCache[path];
     }
 
+    /**
+     * Resolves the index of the boss image based on its health percentage.
+     * @returns {number} The index of the boss image to be used.
+     */
     resolveImageIndex() {
         if (this.percentage === 100) {
             return 5;
