@@ -87,6 +87,7 @@ const reset = () => {
         document.exitFullscreen();
     }
     clearAllIntervals();
+    isGameOn = true;
 };
 
 resetGame.addEventListener("click", reset);
@@ -99,7 +100,7 @@ playAgainButtonYouLost.addEventListener("click", () => {
     playAgainButtonYouLost.classList.remove("d-none");
     playAgainButtonYouWon.classList.remove("play-again-show");
     playAgainButtonYouWon.classList.remove("d-none");
-    isGameOn = true;
+    // isGameOn = true;
     musicButtonOnOff();
     reset();
     start();

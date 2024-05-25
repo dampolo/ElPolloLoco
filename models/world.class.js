@@ -73,7 +73,7 @@ class World {
             if (this.character.counterBottle > 0) {
                 let bottle = new ThrowableObject(
                     this.character.x + 40,
-                    this.character.y + 120,
+                    this.character.y + 120
                 );
 
                 if (this.throwableObjects.length === 0) {
@@ -124,10 +124,8 @@ class World {
             this.boss.isAttacking = false;
             if (this.character.isColliding(enemy)) {
                 soundManager.playSound("chickenDead");
-                if (
-                    this.character.speedY < 0 &&
-                    this.character.isAboveGround()
-                ) {
+                if (this.character.speedY < 0 &&
+                    this.character.isAboveGround()) {
                     if (enemy !== this.boss) {
                         enemy.hit();
                         // Delete chicken and show 1 second.
@@ -199,10 +197,8 @@ class World {
                 if (this.character.isColliding(bottle)) {
                     soundManager.playSound("takeBottle");
                     // Delete bottle after assemblage.
-                    if (
-                        this.character.counterBottle <
-                        this.character.maxCounterBottle
-                    ) {
+                    if (this.character.counterBottle <
+                        this.character.maxCounterBottle) {
                         this.deleteBottleAfterAssemblage(bottle);
                         //Increase bottle counter.
                         this.character.counterBottle += 1;
@@ -249,15 +245,13 @@ class World {
     }
 
     updateBottleStatusBar() {
-        let allBottle =
-            (this.character.counterBottle * 100) /
+        let allBottle = (this.character.counterBottle * 100) /
             this.character.maxCounterBottle;
         this.bottleStatusbars.setPercentage(allBottle);
     }
 
     updateCoinStatusBar() {
-        let allCoins =
-            (this.character.counterCoint * 100) / this.level.coins.length;
+        let allCoins = (this.character.counterCoint * 100) / this.level.coins.length;
         if (this.level.coins.length === 0) {
             allCoins = 100;
         }
@@ -266,7 +260,7 @@ class World {
 
     updateCharacterStatusBar() {
         this.healthStatusBarsBlue.setPercentage(
-            (this.character.energy * 100) / this.character.maxEnergy,
+            (this.character.energy * 100) / this.character.maxEnergy
         );
     }
 

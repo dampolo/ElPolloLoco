@@ -57,7 +57,6 @@ class Endboss extends MovableObject {
         this.loadImages(this.IMAGES_ATTACK);
         this.y = 140;
         this.x = 3650;
-
         this.height = 300;
         this.width = 300;
         this.energy = 25;
@@ -82,7 +81,6 @@ class Endboss extends MovableObject {
             if (isGameOn === false) {
                 return;
             }
-
             this.endbossStayingHurting();
         }, 250);
 
@@ -128,14 +126,20 @@ class Endboss extends MovableObject {
             } else {
                 this.moveLeft();
             }
-            if (this.isHurt()) {
-                this.walkingBossHurt();
-            } else if (this.isDead()) {
-                this.displayYouWon();
-            } else if (this.isAttacking) {
-                this.playAnimation(this.IMAGES_ATTACK);
-            }
+
+            this.walkingBoss();
+            
         }, 250);
+    }
+
+    walkingBoss() {
+        if (this.isHurt()) {
+            this.walkingBossHurt();
+        } else if (this.isDead()) {
+            this.displayYouWon();
+        } else if (this.isAttacking) {
+            this.playAnimation(this.IMAGES_ATTACK);
+        }
     }
 
     walkingBossHurt() {
