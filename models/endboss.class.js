@@ -128,7 +128,6 @@ class Endboss extends MovableObject {
             }
 
             this.walkingBoss();
-            
         }, 250);
     }
 

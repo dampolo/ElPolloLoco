@@ -30,6 +30,7 @@ const canvasCloseInfo = document.querySelector("canvas");
 const playGame = document.querySelector(".play-game");
 const infoScreen = document.querySelector(".description-on-canvas");
 const closeButton = document.querySelector(".close");
+const breakInfo = document.querySelector(".break");
 const embedElement = document.querySelector("embed");
 const playAgainButtonYouLost = document.querySelector(".play-again");
 const playAgainButtonYouWon = document.querySelector(".play-again-you-won");
@@ -133,6 +134,7 @@ playAgainButtonYouWon.addEventListener("click", () => {
 
 const toggleBreak = () => {
     breakButton.classList.toggle("d-none");
+    breakInfo.classList.toggle("play-again-show");
     startButtonBreak.classList.toggle("d-none");
     musicButtonDisable();
     isGameOn = !isGameOn; // Toggle the game state
@@ -156,7 +158,7 @@ const musicButtonDisable = () => {
         musicOnButton.setAttribute("disabled", "true");
         musicOffButton.setAttribute("disabled", "true");
     }
-}
+};
 
 fullScreen.addEventListener("click", () => {
     fullScreen.classList.add("d-none");
