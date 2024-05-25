@@ -28,6 +28,10 @@ class ChickenBaby extends MovableObject {
         this.animate();
     }
 
+    /**
+     * Animates the chicken baby by continuously moving left and playing walking animation.
+     * Stops animation if the game is off or if the character is dead.
+     */
     animate() {
         setInterval(() => {
             if (isGameOn === false) {
