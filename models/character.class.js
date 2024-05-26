@@ -92,14 +92,14 @@ class Character extends MovableObject {
         this.animate();
         this.x = -50;
         this.y = 180;
-        this.speed = 10;
+        this.speed = 7;
         this.height = 250;
         this.width = 100;
         this.characterIsDead = true;
         this.characterIsDeadSound = true;
         this.applyGravity();
         this.counterCoint = 0;
-        this.counterBottle = 6;
+        this.counterBottle = 0;
         this.maxCounterBottle = 6;
         this.maxEnergy = 300;
         this.energy = 300;

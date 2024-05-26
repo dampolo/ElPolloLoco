@@ -98,6 +98,7 @@ canvas {
     -webkit-box-shadow: 0px 0px 10px 3px #ef9248;
     box-shadow: 0px 0px 10px 3px #ef9248;
 }
+
 button {
     display: flex;
     align-items: center;
@@ -285,6 +286,15 @@ button[disabled] {
     cursor: auto;
     width: 1.8rem;
     height: 1.8rem;
+}
+
+.description-on-canvas button.space,
+.description button.space {
+    cursor: auto;
+    width: 5rem;
+    height: 2rem;
+    border-radius: 0.3125rem;
+    font-size: clamp(0.5rem, 4vw, 1.2rem);
 }
 
 .description-on-canvas button:hover {
