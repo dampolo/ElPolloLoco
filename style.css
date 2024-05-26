@@ -291,10 +291,10 @@ button[disabled] {
 .description-on-canvas button.space,
 .description button.space {
     cursor: auto;
-    width: 5rem;
-    height: 2rem;
+    width: 4.5rem;
+    height: 1.6rem;
     border-radius: 0.3125rem;
-    font-size: clamp(0.5rem, 4vw, 1.2rem);
+    font-size: clamp(0.5rem, 4vw, 1rem);
 }
 
 .description-on-canvas button:hover {
